@@ -1,0 +1,23 @@
+apiVersion: v1
+entries:
+  nlp-insights:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2022-02-16T10:29:27.568053191-06:00"
+    description: A Helm Chart to deploy the NLP Insights service.
+    digest: 0f23831266fa1c80fe75cc2cd8b35bb9325d047ac6470843d8624568ba73f7c7
+    home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
+    keywords:
+    - ibm
+    - alvearie
+    - nlp
+    - insights
+    maintainers:
+    - email: atclark@us.ibm.com
+      name: Adam T. Clark
+    name: nlp-insights
+    type: application
+    urls:
+    - nlp-insights-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-02-16T10:29:27.567528397-06:00"
