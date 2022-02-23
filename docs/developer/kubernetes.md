@@ -22,7 +22,7 @@ Be aware that some cloud providers may require additional configuration in order
 For example you may need to create a pull secret. Consult your provider's documentation for details.
 
 ## Additonal information
-Additional information can be found in the [README](../../chart/README.md) for the helm charts.
+Additional information can be found in the README.md in the source tree's chart folder.
 
 ## Configuring the server at deploy time
 

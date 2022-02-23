@@ -16,7 +16,7 @@ Derived and Enriched types are described in the tutorials.
 * [Derive new resources with QuickUMLS](../examples/quickumls/derive_new_resources.md)
 * [Enrich resources with QuickUmls](../examples/quickumls/enrich.md)
 
-<details><summary>Experimental support for non-bundle resources</summary>
+### Experimental support for non-bundle resources
 
 If the discoverInsights API is called with a FHIR resource that is *Not* a bundle, then the returned data depends on the input type:
  
@@ -30,7 +30,6 @@ Other resource types *may* return an error.
 When using this API resources __must__ have a valid identifier. Because health-patterns will invoke the service before creating resources in thie FHIR server, the identifier has not been set. The result is that this version of the API is not as useful in an ingestion pipeline, and therefore is discouraged/experimental.
 
 The version of the API that accepts a bundle input makes use of the fullUrl property in the bundleEntry for each resource (setting the property if necessary), and this allows that variation to support the requirements of health-patterns.
-</details>
 
 ## Configuration
 The app currently supports running two different NLP engine types: 
