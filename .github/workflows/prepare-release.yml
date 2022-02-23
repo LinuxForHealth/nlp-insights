@@ -86,7 +86,7 @@ jobs:
              # just pushed. This is the last step in the flow.
       - name: Complete Prepare Release
         run: |
-             sha = $(git rev-parse HEAD)
+             sha=$(git rev-parse HEAD)
              curl -X POST -H "Accept: application/vnd.github.v3+json" \
              "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/check-runs \
               -d '{"name" : "Prepare release",  "head_sha" : "'${sha}'", "status" : "completed", "conclusion" : "success", '\
