@@ -1,6 +1,8 @@
 name: nlp-insights PUSH Validation
 on: 
   push:
+   branches-ignore:
+    - 'main'
 defaults:
   run:
     shell: bash

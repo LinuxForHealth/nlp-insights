@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - 'services/nlp-insights/gradle.properties'
+      - 'gradle.properties'
 
 jobs:
   create-release:
