@@ -80,3 +80,15 @@ jobs:
              git add -A
              git commit --signoff -m "Update to version ${{ env.VERSION }}" || true
              git push || true #Ignore errors in case no files have changed
+
+             # The commit that we just pushed will not trigger the prepare release action (avoids recursion)
+             # So we need to explicitly tag the action complete for the commit that we
+             # just pushed. This is the last step in the flow.
+      - name: Complete Prepare Release
+        run: |
+             sha = $(git rev-parse HEAD)
+             curl -X POST -H "Accept: application/vnd.github.v3+json" \
+             "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/check-runs \
+              -d '{"name" : "Prepare release",  "head_sha" : "'${sha}'", "status" : "completed", "conclusion" : "success", '\
+                   "started_at" : "'$(date --iso-8601=seconds)'", "completed_at" : "'$(date --iso-8601=seconds)'"}'
+
