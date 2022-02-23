@@ -86,6 +86,7 @@ jobs:
              # just pushed. This is the last step in the flow.
       - name: Signal Completion
         run: |
+             BUILD_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
              obj=<< OBJ
              {
               "name" : "Prepare release",
@@ -94,9 +95,11 @@ jobs:
               "conclusion" : "success",
               "started_at" : "$(date --iso-8601=seconds)",
               "completed_at" : "$(date --iso-8601=seconds)"
+              "detauls_url" : "${BUILD_URL}"
              }
              OBJ
 
              curl -X POST -H "Accept: application/vnd.github.v3+json" \
+             -H --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
              "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/check-runs" \
              -d "${obj}"
