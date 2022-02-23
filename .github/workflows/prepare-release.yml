@@ -99,6 +99,8 @@ jobs:
              }
              OBJ
 
+             echo "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/check-runs"
+
              curl -X POST -H "Accept: application/vnd.github.v3+json" \
              -H --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
              "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/check-runs" \
