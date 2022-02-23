@@ -1,0 +1,82 @@
+name: Prepare to release nlp-insights 
+on:
+  pull_request:
+    types: [opened, synchronize, labeled, reopened]
+    branches:
+      - main
+
+jobs:
+  prepare-release:
+    name: Prepare release
+    if: ${{ github.event.label.name != 'no-release' }}
+    runs-on: ubuntu-latest
+
+    env:
+      docker_server: docker.io
+      docker_org: ntlawrence
+      docker_repo: nlp-insights
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Checkout branch
+        run: |
+             git fetch
+             git checkout ${{ github.event.pull_request.head.ref }}
+      - name: Install python 3.9
+        run: |
+             .github/workflows/scripts/install-python-39.sh
+             npm install -g dockerlint
+      - name: Docker login
+        run: echo ${{ secrets.docker_password }} | docker login --username ${{ secrets.docker_username }} --password-stdin ${{ env.docker_server }}
+      - name: Determine release tag
+        run: |
+             set -ex
+             source .github/workflows/scripts/utils.sh
+             if [[ "${{ github.event.label.name }}" =~ '^(release-major|release-minor|release-patch)$' ]]; then
+               RELEASE="${{ github.event.label.name }}"
+             elif [ -z "${{ github.event.label.name }}" ]; then
+               &>2 echo "There was no label (valid values are release-major, release-minor, or release-patch), using release-patch"
+               RELEASE=release-patch
+             else
+               &>2 echo "The pull request must have a label in (release-major, release-minor, or release-patch)."
+               exit 1
+             fi
+
+             echo "VERSION=$(calculate_tag ${{ env.docker_repo }} ${{ env.docker_server }} ${{ env.docker_org }} ${RELEASE} )" >> $GITHUB_ENV
+             &>2 echo "${VERSION} was assigned as a release tag"
+      - name: Update release files
+        run: |
+             UPDATES=0
+             .github/workflows/scripts/update_files_with_version.sh \
+              --project_dir=. \
+              --version=${{ env.VERSION }} \
+              --docker_org=${{ env.docker_org }} \
+              --docker_repo=${{ env.docker_repo}} || UPDATES=$?
+
+             &>2 echo "${UPDATES} changes were made to update the release to ${{ env.VERSION }}"
+
+      - name: Unit Test
+        run:  ./gradlew test
+
+      - name: Static Code Analysis
+        run: |
+             if [[ "${{ github.event.pull_request.title }}" =~ '.*\[noFailForSourceProblems\].*' ]]; then
+               CHECK_SOURCE_NO_FAIL="-PnoFailForSourceProblems"
+             fi
+             ./gradlew checkSource $CHECK_SOURCE_NO_FAIL
+
+      - name: Docker Lint
+        run:  dockerlint
+
+      - name: Push Docker Image
+        run: |
+             ./gradlew checkSource dockerPush -PdockerUser=${{ env.docker_server }}/${{ env.docker_org }}
+      - name: Commit release updates to git
+        run: |
+             git config user.name ${{ github.actor }}
+             git config user.email "${{ github.actor }}@users.noreply.github.com"
+             git add -A
+             git commit --signoff -m "Update to version ${{ env.VERSION }}" || true
+             git push || true #Ignore errors in case no files have changed
