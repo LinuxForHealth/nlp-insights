@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   repository: ntlawrence/nlp-insights
   pullPolicy: Always
-  tag: 0.0.12
+  tag: 0.0.13
   pullSecret:
 
 service:
