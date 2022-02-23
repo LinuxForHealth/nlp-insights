@@ -3,7 +3,7 @@ entries:
   nlp-insights:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T22:40:52.825120789Z"
+    created: "2022-02-23T23:06:56.564700016Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: 0f23831266fa1c80fe75cc2cd8b35bb9325d047ac6470843d8624568ba73f7c7
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -22,7 +22,26 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T22:40:52.824629586Z"
+    created: "2022-02-23T23:06:56.564209407Z"
+    description: A Helm Chart to deploy the NLP Insights service.
+    digest: c481400dde21587869bc1d3efc9f94f8dbf36de642d829c849588be10e49fbb0
+    home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
+    keywords:
+    - ibm
+    - alvearie
+    - nlp
+    - insights
+    maintainers:
+    - email: atclark@us.ibm.com
+      name: Adam T. Clark
+    name: nlp-insights
+    type: application
+    urls:
+    - nlp-insights-0.0.22.tgz
+    version: 0.0.22
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2022-02-23T23:06:56.563667997Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: 619348649b94a3ca4098996c9650d104c10a2ede43ee9cd505c6d33fb5b233c5
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -41,7 +60,7 @@ entries:
     version: 0.0.21
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T22:40:52.824115483Z"
+    created: "2022-02-23T23:06:56.563117487Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: cab1d51d3af93f0d3bdf53f75a412d4085d0428ae983b7ecc89fa0f86df27ac6
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -60,7 +79,7 @@ entries:
     version: 0.0.20
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T22:40:52.82365518Z"
+    created: "2022-02-23T23:06:56.562511276Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: aeeef68415ebf767797f96f6f46c621b38391e8a572cca284d7db3ec3ef01a17
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -79,7 +98,7 @@ entries:
     version: 0.0.19
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T22:40:52.823180577Z"
+    created: "2022-02-23T23:06:56.549433338Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: b0bfd6ca37242f18f6ce5938c259274ce7d9be85c3c60a0213fe48e4a1baec81
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -98,7 +117,7 @@ entries:
     version: 0.0.18
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T22:40:52.822691574Z"
+    created: "2022-02-23T23:06:56.549030331Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: e9f0c77508d1ab603a00c5087bc3d4cb1965faad2f9d54202aa0ba08b2bc095c
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -117,7 +136,7 @@ entries:
     version: 0.0.17
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T22:40:52.822188471Z"
+    created: "2022-02-23T23:06:56.548620423Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: 52b8b48e9867f263c0c11d407691960a9410107c38e79f380504a6a221227fe3
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -136,7 +155,7 @@ entries:
     version: 0.0.16
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T22:40:52.821768268Z"
+    created: "2022-02-23T23:06:56.548222016Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: 9e11ce70be79afc77c5eab825462daca2ed9627c49492c48cb1f10caf887f494
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -155,7 +174,7 @@ entries:
     version: 0.0.15
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T22:40:52.821422266Z"
+    created: "2022-02-23T23:06:56.547787908Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: b831af9b695ba31a226ed093ad990d70cd30029aa2d6916a9b9d52b80b40f10f
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -174,7 +193,7 @@ entries:
     version: 0.0.14
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T22:40:52.821055964Z"
+    created: "2022-02-23T23:06:56.547388301Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: b5e5e260340ef5c2d1c63ae642e9ebabd89a3dc30d6700d8505b4f980a751987
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -193,7 +212,7 @@ entries:
     version: 0.0.13
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T22:40:52.820679162Z"
+    created: "2022-02-23T23:06:56.546937593Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: e00a7900d6895b7fe1c5db4e2d74d6711653951740cdaf2d0bbbf8dabd338a9e
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -212,7 +231,7 @@ entries:
     version: 0.0.12
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T22:40:52.820305959Z"
+    created: "2022-02-23T23:06:56.546450084Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: 694662e412c61f6df2f27f9ffaa446f66f5e68034955c7778faa056421ca7dee
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -231,7 +250,7 @@ entries:
     version: 0.0.11
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T22:40:52.819915057Z"
+    created: "2022-02-23T23:06:56.545952875Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: 47e60fa475e2e33e5e65a142726dbd79d95da0204e40b1739a9ac88945cc5f07
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -248,4 +267,4 @@ entries:
     urls:
     - nlp-insights-0.0.10.tgz
     version: 0.0.10
-generated: "2022-02-23T22:40:52.8109215Z"
+generated: "2022-02-23T23:06:56.545228261Z"
