@@ -3,7 +3,7 @@ entries:
   nlp-insights:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T21:12:44.658598415Z"
+    created: "2022-02-23T21:28:17.61224472Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: 0f23831266fa1c80fe75cc2cd8b35bb9325d047ac6470843d8624568ba73f7c7
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -22,7 +22,26 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T21:12:44.658157084Z"
+    created: "2022-02-23T21:28:17.611878814Z"
+    description: A Helm Chart to deploy the NLP Insights service.
+    digest: b0bfd6ca37242f18f6ce5938c259274ce7d9be85c3c60a0213fe48e4a1baec81
+    home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
+    keywords:
+    - ibm
+    - alvearie
+    - nlp
+    - insights
+    maintainers:
+    - email: atclark@us.ibm.com
+      name: Adam T. Clark
+    name: nlp-insights
+    type: application
+    urls:
+    - nlp-insights-0.0.18.tgz
+    version: 0.0.18
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2022-02-23T21:28:17.611523808Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: e9f0c77508d1ab603a00c5087bc3d4cb1965faad2f9d54202aa0ba08b2bc095c
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -41,7 +60,7 @@ entries:
     version: 0.0.17
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T21:12:44.657720753Z"
+    created: "2022-02-23T21:28:17.611169401Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: 52b8b48e9867f263c0c11d407691960a9410107c38e79f380504a6a221227fe3
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -60,7 +79,7 @@ entries:
     version: 0.0.16
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T21:12:44.657292823Z"
+    created: "2022-02-23T21:28:17.610777894Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: 9e11ce70be79afc77c5eab825462daca2ed9627c49492c48cb1f10caf887f494
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -79,7 +98,7 @@ entries:
     version: 0.0.15
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T21:12:44.656725583Z"
+    created: "2022-02-23T21:28:17.610370287Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: b831af9b695ba31a226ed093ad990d70cd30029aa2d6916a9b9d52b80b40f10f
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -98,7 +117,7 @@ entries:
     version: 0.0.14
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T21:12:44.656250649Z"
+    created: "2022-02-23T21:28:17.610002581Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: b5e5e260340ef5c2d1c63ae642e9ebabd89a3dc30d6700d8505b4f980a751987
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -117,7 +136,7 @@ entries:
     version: 0.0.13
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T21:12:44.655752114Z"
+    created: "2022-02-23T21:28:17.609247367Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: e00a7900d6895b7fe1c5db4e2d74d6711653951740cdaf2d0bbbf8dabd338a9e
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -136,7 +155,7 @@ entries:
     version: 0.0.12
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T21:12:44.655024863Z"
+    created: "2022-02-23T21:28:17.608666957Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: 694662e412c61f6df2f27f9ffaa446f66f5e68034955c7778faa056421ca7dee
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -155,7 +174,7 @@ entries:
     version: 0.0.11
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-23T21:12:44.654289011Z"
+    created: "2022-02-23T21:28:17.608058446Z"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: 47e60fa475e2e33e5e65a142726dbd79d95da0204e40b1739a9ac88945cc5f07
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -172,4 +191,4 @@ entries:
     urls:
     - nlp-insights-0.0.10.tgz
     version: 0.0.10
-generated: "2022-02-23T21:12:44.653081025Z"
+generated: "2022-02-23T21:28:17.607220831Z"
