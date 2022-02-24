@@ -85,24 +85,20 @@ jobs:
              # The commit that we just pushed will not trigger the prepare release action (avoids recursion)
              # So we need to explicitly tag the action complete for the commit that we
              # just pushed. This is the last step in the flow.
+             # See: https://docs.github.com/en/rest/reference/commits#create-a-commit-status
       - name: Signal Completion
         run: |
-             set -ex
              BUILD_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-             obj=<< OBJ
+             read -r -d '' obj <<'OBJ'
              {
-              "name" : "Prepare release",
-              "head_sha" : "${sha}",
-              "status" : "completed",
-              "conclusion" : "success",
-              "started_at" : "$(date --iso-8601=seconds)",
-              "completed_at" : "$(date --iso-8601=seconds)"
-              "detauls_url" : "${BUILD_URL}"
+               "state" : "success",
+               "context" : "Prepare release",
+               "target_url": "${BUILD_URL}"
              }
              OBJ
 
  
-             curl -X POST -H "Accept: application/vnd.github.v3+json" \
-             -H --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-             "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/check-runs" \
-             -d "${obj}"
+             curl -X POST "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/statuses/${sha}"  \
+                  -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+                  -H "Accept: application/vnd.github.v3+json" \
+                  -d "${obj}"
