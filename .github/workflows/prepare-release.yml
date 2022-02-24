@@ -36,15 +36,15 @@ jobs:
              if [[ "${{ github.event.label.name }}" =~ '^(release-major|release-minor|release-patch)$' ]]; then
                RELEASE="${{ github.event.label.name }}"
              elif [ -z "${{ github.event.label.name }}" ]; then
-               &>2 echo "There was no label (valid values are release-major, release-minor, or release-patch), using release-patch"
+               >&2 echo "There was no label (valid values are release-major, release-minor, or release-patch), using release-patch"
                RELEASE=release-patch
              else
-               &>2 echo "The pull request must have a label in (release-major, release-minor, or release-patch)."
+               >&2 echo "The pull request must have a label in (release-major, release-minor, or release-patch)."
                exit 1
              fi
 
              echo "VERSION=$(calculate_tag ${{ env.docker_repo }} ${{ env.docker_server }} ${{ env.docker_org }} ${RELEASE} )" >> $GITHUB_ENV
-             &>2 echo "${VERSION} was assigned as a release tag"
+             >&2 echo "${VERSION} was assigned as a release tag"
       - name: Update release files
         run: |
              UPDATES=0
@@ -54,7 +54,7 @@ jobs:
               --docker_org=${{ env.docker_org }} \
               --docker_repo=${{ env.docker_repo}} || UPDATES=$?
 
-             &>2 echo "${UPDATES} changes were made to update the release to ${{ env.VERSION }}"
+             >&2 echo "${UPDATES} changes were made to update the release to ${{ env.VERSION }}"
 
       - name: Unit Test
         run:  ./gradlew test
