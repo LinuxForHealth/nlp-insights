@@ -1,3 +1,0 @@
-ibm-whcs-sdk==1.9.0
-fhir.resources==6.1.0
-flask==2.0.1
