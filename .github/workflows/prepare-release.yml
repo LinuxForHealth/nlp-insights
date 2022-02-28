@@ -47,12 +47,11 @@ jobs:
              >&2 echo "${VERSION} was assigned as a release tag"
       - name: Update release files
         run: |
-             UPDATES=0
-             .github/workflows/scripts/update_files_with_version.sh \
+             UPDATES=$((.github/workflows/scripts/update_files_with_version.sh \
               --project_dir=. \
               --version=${{ env.VERSION }} \
               --docker_org=${{ env.docker_org }} \
-              --docker_repo=${{ env.docker_repo}} || UPDATES=$?
+              --docker_repo=${{ env.docker_repo}}))
 
              >&2 echo "${UPDATES} changes were made to update the release to ${{ env.VERSION }}"
 
