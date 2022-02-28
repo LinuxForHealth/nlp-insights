@@ -44,7 +44,7 @@ jobs:
              fi
 
              echo "VERSION=$(calculate_tag ${{ env.docker_repo }} ${{ env.docker_server }} ${{ env.docker_org }} ${RELEASE} )" >> $GITHUB_ENV
-             >&2 echo "${VERSION} was assigned as a release tag"
+             >&2 echo "${{ env.version }} was assigned as a release tag"
       - name: Update release files
         run: |
              set -ex
