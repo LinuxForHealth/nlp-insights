@@ -72,7 +72,7 @@ if [[ ${last_service_helm_ver} != ${VERSION} ]]; then
 fi
 
 # app version
-last_app_ver="$(grep "version:" ${chart_yaml} | sed -r 's/appVersion: (.*)/\1/')"
+last_app_ver="$(grep "appVersion:" ${chart_yaml} | sed -r 's/appVersion: (.*)/\1/')"
 last_app_ver=`echo $last_app_ver | sed -e 's/^[[:space:]]*//'`
 if [[ ${last_app_ver} != ${VERSION} ]]; then
   >&2 echo "Updating ${chart_yaml} appVersion to version ${VERSION}"
@@ -104,5 +104,5 @@ if [[ ${last_gradle_tag} != ${VERSION} ]]; then
   updates=$((updates+1))
 fi
 
-
-exit $((updates))
+echo $updates
+exit 0 
