@@ -5,9 +5,9 @@
 replicaCount: 1
 
 image:
-  repository: ntlawrence/nlp-insights
+  repository: alvearie/nlp-insights
   pullPolicy: Always
-  tag: 0.0.29
+  tag: 0.1.2
   pullSecret:
 
 service:

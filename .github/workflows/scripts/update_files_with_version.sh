@@ -62,12 +62,21 @@ fi
 ######
 chart_yaml=${PROJECT_DIR}/chart/Chart.yaml
 
-# tag
+# version
 last_service_helm_ver="$(grep "version:" ${chart_yaml} | sed -r 's/version: (.*)/\1/')"
 last_service_helm_ver=`echo $last_service_helm_ver | sed -e 's/^[[:space:]]*//'`
 if [[ ${last_service_helm_ver} != ${VERSION} ]]; then
   >&2 echo "Updating ${chart_yaml} to version ${VERSION}"
   sed -i -e 's/version: '${last_service_helm_ver}'/version: '${VERSION}'/' ${chart_yaml}
+  updates=$((updates+1))
+fi
+
+# app version
+last_app_ver="$(grep "appVersion:" ${chart_yaml} | sed -r 's/appVersion: (.*)/\1/')"
+last_app_ver=`echo $last_app_ver | sed -e 's/^[[:space:]]*//'`
+if [[ ${last_app_ver} != ${VERSION} ]]; then
+  >&2 echo "Updating ${chart_yaml} appVersion to version ${VERSION}"
+  sed -i -e 's/appVersion: '${last_app_ver}'/appVersion: '${VERSION}'/' ${chart_yaml}
   updates=$((updates+1))
 fi
 
@@ -95,5 +104,5 @@ if [[ ${last_gradle_tag} != ${VERSION} ]]; then
   updates=$((updates+1))
 fi
 
-
-exit $((updates))
+echo $updates
+exit 0 

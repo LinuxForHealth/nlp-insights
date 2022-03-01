@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      docker_server: docker.io
-      docker_org: ntlawrence
+      docker_server: quay.io
+      docker_org: alvearie
       docker_repo: nlp-insights
 
     steps:
@@ -44,15 +44,15 @@ jobs:
              fi
 
              echo "VERSION=$(calculate_tag ${{ env.docker_repo }} ${{ env.docker_server }} ${{ env.docker_org }} ${RELEASE} )" >> $GITHUB_ENV
-             >&2 echo "${VERSION} was assigned as a release tag"
+             >&2 echo "${{ env.version }} was assigned as a release tag"
       - name: Update release files
         run: |
-             UPDATES=0
-             .github/workflows/scripts/update_files_with_version.sh \
+             set -ex
+             UPDATES=$(.github/workflows/scripts/update_files_with_version.sh \
               --project_dir=. \
               --version=${{ env.VERSION }} \
               --docker_org=${{ env.docker_org }} \
-              --docker_repo=${{ env.docker_repo}} || UPDATES=$?
+              --docker_repo=${{ env.docker_repo}})
 
              >&2 echo "${UPDATES} changes were made to update the release to ${{ env.VERSION }}"
 
