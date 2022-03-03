@@ -7,9 +7,10 @@ nlp-insights can derive new resources from:
 * DiagnosticReport  (from the text at the path *DiagnosticReport.presentedForm[].data*)
 * DocumentReference (from the text at the path *DocumentReference.content[].attachment.data*)
 
-Two types of FHIR resources can be derived by the service:
+Three types of FHIR resources can be derived by the service:
 * Condition
 * MedicationStatement
+* [Adverse Event](./adverse_event.md) (new as of 0.1.0)
 
 ## Configure nlp-insights to use ACD for NLP
 If the nlp-insights service has not been configured to use ACD by default, follow the steps [here](./configure_acd.md).

@@ -5,7 +5,7 @@ The ultimate goal of the CI pipeline is to ensure that when code is merged into 
 
 - The code being merged is of high quality (tests pass)
 - A release is created in git.
-- There is a container image in quay.io that was built using the release, the image tag matches the release.
+- There is a container image in a registry that was built using the release, the image tag matches the release.
 - All commits in the merge satisfy the [DCO](https://github.com/apps/dco) requirements.
 
 This makes it easy to find the latest release, and pull the associated container image.
@@ -86,8 +86,9 @@ These files are:
 - values.yaml
 - chart.yaml
 
-The helm charts are then packaged into a *.tgz file and stored in the docs/charts directory. This will them to be access from github.io after
-the branch is merged into main. Once packed, a repo index is performed on docs/charts to create an index.yaml for all charts that exist in the directory.
+The helm charts are then packaged into a *.tgz file and stored in the docs/charts directory. This makes them accessible from github.io after
+the branch is merged into main. Once packaged, a repo index is performed on docs/charts to create an index.yaml for all charts that exist in
+the directory.
 
 The version in gradle.properties is updated to the release version. This version is used when building the docker image.
 
@@ -100,7 +101,7 @@ The build will run unit tests and perform linting and static code analysis.
 The docker image is built and pushed to the container registry
 
 ### Commit release updates to Git
-The prior changes to the branch are committed to git.
+The prior changes to the branch are committed to Git.
 
 > :warning: Making a pull request results in an additional commit from within an action,
 a developer will have to do a fetch and rebase to see the latest changes for these files.

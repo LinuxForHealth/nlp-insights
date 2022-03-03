@@ -643,7 +643,7 @@
             "url": "http://ibm.com/fhir/cdm/StructureDefinition/insight-summary"
           }
         ],
-        "actuality": "potential",
+        "actuality": "actual",
         "event": {
           "coding": [
             {
@@ -780,7 +780,7 @@
             "url": "http://ibm.com/fhir/cdm/StructureDefinition/insight-summary"
           }
         ],
-        "actuality": "potential",
+        "actuality": "actual",
         "event": {
           "coding": [
             {
