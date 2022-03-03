@@ -14,7 +14,7 @@ Actions run at multiple points in the development lifecycle.
 
 1. Push new commits to a user branch
 1. Pull request
-1. Push code into main (The result of a pull requests)
+1. Push commits to main (The result of a pull requests)
 
 ## Push new commits to a user branch
 When new commits are pushed to a user branch, the `nlp-insights-push-validation.yml` workflow is invoked. The purpose of this workflow is to provide fast validation of the code that was pushed. It performs the following high level tasks.
@@ -105,3 +105,6 @@ The prior changes to the branch are committed to git.
 > :warning: Making a pull request results in an additional commit from within an action,
 a developer will have to do a fetch and rebase to see the latest changes for these files.
 
+## Push commits to main
+When a commit is pushed to main, the `release.yml` workflow will create a release tag for the commit.
+The value of the release tag is determined from the version in the `gradel.properties` file.
