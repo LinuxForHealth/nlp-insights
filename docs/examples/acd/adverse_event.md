@@ -22,8 +22,6 @@ The capabilities of the nlp-insights service are best explained using an example
 Adverse Events are very challenging for NLP to detect.
 In this example, there is no single phrase that indicates an Adverse Event happened. 
 
-The report text must be converted to base64 encoding, so that it can be attached to a diagnostic report.
-
 ```
 B64_REPORT_TEXT=$(echo "\
 The patient's course was also complicated by mental status \
@@ -34,7 +32,8 @@ The Neurontin was stopped and he received hemodialysis on consecutive days.\
 ```
 
 The diagnostic report is built and sent to the nlp-insights service for insight discovery. 
-The returned resources are stored in a json file for future analysis.
+The returned resources are stored in a json file for future analysis. (The report text has alredy been converted to base64 encoding,
+so that it can be attached to a diagnostic report).
 
 
 ```
