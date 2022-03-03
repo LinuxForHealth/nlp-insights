@@ -8,7 +8,7 @@ This project uses two industry standard test frameworks.
 * Behaviors of nlp-insights are tested using [pytest](https://docs.pytest.org/en/7.0.x/).
 
 ## Running tests
-The Gradle build for the project will run unit tests before creating the docker image, or tests can be run directly by executing `./gradlew test` (Linux) or `/gradlew.bad test` (Windows).
+The Gradle build for the project will run unit tests before creating the docker image, or tests can be run directly by executing `./gradlew test` (Linux) or `/gradlew.bat test` (Windows).
 
 ### IDE Test Runners
 All Python IDEs support running unit tests, and most allow the developer to choose which test runner to use. For example, you can setup Eclipse to use the Py.test runner. This runner is equivalent to the pytest tool that Gradle uses, and allows tests to be run under debug, which can be very valuable.
@@ -155,9 +155,6 @@ class TestClassWithMockACD(UnitTestUsingExternalResource): # (5)
                 actual_resource=actual_bundle,
             )
             self.assertFalse(cmp, cmp.pretty())
-            
-            
-    
 ```
 
 1. The root application is `nlp_insights.app.app` (`app` is in the `app` package), The application is a global singleton, we don't use Flask blueprints. The `app` package contains functions for working with that global app.
@@ -167,32 +164,42 @@ class TestClassWithMockACD(UnitTestUsingExternalResource): # (5)
 1. The `UnitTestUsingExternalResource` parent class defines the directory where resource files exist. It also defines where the expected output files for tests are stored and what their names are. (The name is computed from the testcase method).
 1. `with app.app.test_client() as service` makes serive a test_client that we can send mock REST requests to.
 1. Creating a config definition for ACD is implemented as:
-    <code>
     
-        rsp = service.post("/config/definition",
-                           json={
-                               "name": "acdconfig1",
-                               "nlpServiceType": "acd",
-                               "config": {
-                                   "apikey": "**un-needed**",
-                                   "endpoint": "https://none.org",
-                                   "flow": "not_used",
-                               },
+    ```python
+    rsp = service.post("/config/definition",
+                       json={
+                             "name": "acdconfig1",
+                             "nlpServiceType": "acd",
+                             "config": {
+                                 "apikey": "**un-needed**",
+                                 "endpoint": "https://none.org",
+                                 "flow": "not_used",
+                             },
                             },
-                           )
+                      )
         
-         if rsp.status_code not in (200, 204):
-             raise RuntimeError()
-    
-    </code>
+    if rsp.status_code not in (200, 204):
+        raise RuntimeError()
+    ```
     
 1. Setting the default NLP to ACD is implemented as:
-    <code>
     
-        rsp = service.post(f"/config/setDefault?name=acdconfig1")
-        if rsp.status_code not in (200, 204):
-            raise RuntimeError()
-    </code>
+    ```python
+    rsp = service.post(f"/config/setDefault?name=acdconfig1")
+    if rsp.status_code not in (200, 204):
+        raise RuntimeError()
+    ```
 
 1. Parsing the response from nlp-insights has found errors in the past. For example the service could construct a condition without a subject. This would fail even the very limited FHIR validation that happens with the parse that is used here.
 1. The expected path is calculated from  the testcase name and class name. e.g. `test/resources/expected_results/TestClassWithMockACD/test_when_something_then_expected_result.json`
+
+### Error reporting
+If a compare fails, an explanation of what the difference was appears in the message.
+The information includes the path from the root of the json document to the difference, and the changed values.
+
+```
+values_changed at path root['entry'][1]['resource']['code']['coding'][0]['code'] 
+    EXPECTED=C0027051
+    ACTUAL  =<something-else>
+```
+
