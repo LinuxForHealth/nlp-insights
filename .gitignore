@@ -2,3 +2,6 @@ build
 .gradle
 .project
 .pydevproject
+__pycache__/
+docs/**/.*.md.html
+/.mypy_cache/
