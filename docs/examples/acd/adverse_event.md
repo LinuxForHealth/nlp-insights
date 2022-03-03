@@ -399,7 +399,9 @@ neurontin         |C0678176|http://terminology.hl7.org/CodeSystem/umls
 While the FHIR standard distinguishes between potential (or near-miss) adverse events and actual events, the nlp-insights service creates
 adverse event resources as actual, and does not distinguish between actual and potential events.
 
-ACD does provide some possibilities for improvement. For example, suppose the text passage was something similar to:
+It is possible that the problem could be solved (in some cases) with a code change to nlp-insights.
+For example, suppose the text passage was something similar to:
+
 ```
 The patient's course could have been complicated by mental status \
 changes secondary to a combination of narcotics and Neurontin, \
@@ -422,8 +424,8 @@ ACD would return confidences with a high value for "considering" usage score:
 This could be leveraged by nlp-insights to determine that the event did not actually happen.
 
 In building the reference implementation, we did not have sufficient examples to determine 
-if this approach would work well in practice.
-In addition, ACD may or may not add additional functionality to solve this problem in the future.
+if this approach would work well enough to be of value in practice.
+Another consideration was that additional functionality might someday be added to ACD that solves this problem in a better way.
 
 The determination of actuality is therefore still an area of research and construction.
 
