@@ -8,8 +8,10 @@ The nlp-insights service will detect adverse events that are **medication** rela
 
 > :construction: Adverse events are characterized by the need to capture cause and effect, in addition to actuality, 
 > severity and outcome. The nlp-insights service currently limits discovery to the detection of medication related
-> adverse events. There is no support for creating relationships with other resources to model characteristics of the event.
-> While detection is a significant step forward, further contributions to this feature will be needed as more
+> adverse events. There is no support for creating cause/effect/outcome relationships with
+> other resources that represent characteristics of the event. Standard codes such as SNOMED CT and MedDRA are NOT included 
+> in the created AdverseEvent FHIR resource.
+> While detection is a significant step forward, further contributions to this feature will be needed when more
 > ACD support becomes available. :construction:
 
 The capabilities of the nlp-insights service are best explained using an example.
@@ -19,8 +21,9 @@ The capabilities of the nlp-insights service are best explained using an example
 
 
 ## Derive insights from a diagnostic report that describes an adverse event
-Adverse Events are very challenging for NLP to detect.
-In this example, there is no single phrase that indicates an Adverse Event happened. 
+Adverse Events are very challenging for NLP to recognize because they involve multiple concepts, temporal relationships and causality.
+
+This example is typical; There is no single concept or span of text that indicates an Adverse Event happened. 
 
 ```
 B64_REPORT_TEXT=$(echo "\
@@ -408,7 +411,7 @@ changes secondary to a combination of narcotics and Neurontin, \
 which was almost perscribed for his trigeminal neuralgia and chronic pain.
 ```
 
-ACD would return confidences with a high value for "considering" usage score:
+ACD would return confidences with a high value for the "considering" usage score:
 ```json
  "adverseEvent": {
     "score": 0.999,
@@ -424,10 +427,11 @@ ACD would return confidences with a high value for "considering" usage score:
 This could be leveraged by nlp-insights to determine that the event did not actually happen.
 
 In building the reference implementation, we did not have sufficient examples to determine 
-if this approach would work well enough to be of value in practice.
+if this approach would work well enough to be of value in practice, or what value of 
+the consideringScore should be used as the decision boundary.
 Another consideration was that additional functionality might someday be added to ACD that solves this problem in a better way.
 
-The determination of actuality is therefore still an area of research and construction.
+:construction: The determination of actuality is therefore still an area of research and further contribution. :construction:
 
 ## Evidence
 The available evidence is consistent with [other derived resource types](./derive_new_resources.md).
