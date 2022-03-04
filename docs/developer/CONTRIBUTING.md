@@ -2,10 +2,10 @@
 Our project welcomes external contributions. If you have an itch, please feel
 free to scratch it.
 
-To contribute code or documentation, please submit a [pull request](https://github.com/Alvearie/health-patterns/pulls).
+To contribute code or documentation, please submit a [pull request](https://github.com/LinuxForHealth/nlp-insights/pulls).
 
 A good way to familiarize yourself with the codebase and contribution process is
-to look for and tackle low-hanging fruit in the [issue tracker](https://github.com/Alvearie/health-patterns/issues).
+to look for and tackle low-hanging fruit in the [issue tracker](https://github.com/LinuxForHealth/nlp-insights/issues).
 Before embarking on a more ambitious contribution, please [communicate](#communication) with us.
 
 *We appreciate your effort, and want to avoid a situation where a contribution
@@ -14,14 +14,14 @@ cannot be accepted at all!*
 
 ### Proposing new features
 
-If you would like to implement a new feature, please [raise an issue](https://github.com/Alvearie/health-patterns/issues)
+If you would like to implement a new feature, please [raise an issue](https://github.com/LinuxForHealth/nlp-insights/issue)
 before sending a pull request so the feature can be discussed. This is to avoid
 you wasting your valuable time working on a feature that the project developers
 are not interested in accepting into the code base.
 
 ### Fixing bugs
 
-If you would like to fix a bug, please [raise an issue](https://github.com/Alvearie/health-patterns/issues) before sending a
+If you would like to fix a bug, please [raise an issue](https://github.com/LinuxForHealth/nlp-insights/issues) before sending a
 pull request so it can be tracked.
 
 ### Merge approval
@@ -59,7 +59,7 @@ git commit -s
 ```
 
 ## Communication
-Connect with us by opening an [issue](https://github.com/Alvearie/health-patterns/issues).
+Connect with us by opening an [issue](https://github.com/LinuxForHealth/nlp-insights/issues).
 
 ## Coding style guidelines
 This project makes use of several coding conventions and tools.
