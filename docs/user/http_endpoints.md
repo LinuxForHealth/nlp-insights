@@ -2,6 +2,7 @@
 
 ## Discover Insights
 The discoverInsights API accepts an input bundle and returns an updated bundle with:
+
 * Resources that have been enriched with additional codes
 * Resources that have been derived from unstructured text (such as clinical notes) contained within the bundle's resources.
  
@@ -33,6 +34,7 @@ The version of the API that accepts a bundle input makes use of the fullUrl prop
 
 ## Configuration
 The app currently supports running two different NLP engine types: 
+
 * [IBM's Annotator for Clinical Data (ACD)](https://www.ibm.com/cloud/watson-annotator-for-clinical-data) and 
 * [open-source QuickUMLS](https://github.com/Georgetown-IR-Lab/QuickUMLS)
 
@@ -96,15 +98,18 @@ These APIs are used for configuring the NLP engine that will be used to discover
 
 </td></tr>
 
-<tr><td> Add Named Config </td><td> PUT/POST <BR/><I><code>/config/definition</code></I></td><td>json config see:
+<tr><td> Add Named Config </td><td> PUT/POST <BR/><I><code>/config/definition</code></I></td><td> json config see:
 
-* [Configuration Definition](#configuration-definition)
+<BR/>
+<a href="#configuration-definition">Configuration Definition</a> 
 
 </td><td>Status: <CODE>204 NO CONTENT</CODE></td></tr>
 
 <tr><td> Delete Config </td><td> DELETE<BR/><I><code>/config/{configName}</code></I></td> <td></td><td>Status: <CODE>204 NO CONTENT</CODE></td></tr>
 
-<tr><td> Get Config Details </td><td> GET <BR/><I><Code>/config/{configName}</CODE></I></td><td></td><td> Configuration json (sensitive data will be masked):
+<tr><td> Get Config Details </td><td> GET <BR/><I><Code>/config/{configName}</CODE></I></td><td></td><td>
+Configuration json (sensitive data will be masked):
+<br/><br/>
 
 QuickUmls Example:
 

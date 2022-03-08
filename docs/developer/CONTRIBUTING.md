@@ -80,6 +80,23 @@ Unit tests and Doc tests are run as part of the build process. New function shou
 Tests can be executed with the build command
 `./gradlew test`
 
+## Documentation
+When significant new function is added, the documentation should also be updated. Our documentation is built using mkdocs.
+
+* The gh-pages environment is disabled for the repo
+* A github action (build-docs.yml) builds the documentation and deploys to the gh-pages branch.
+    - This happens (on-demand), or after a push to the main branch, where files have changed under docs.
+    - Because helm charts are deployed using the docs infrastructure, pushes to main will (usually) rebuild documentation.
+    - Repo should be configured so that pages is loaded from gh-pages (root directory). On initial creation of the repo, you might need to 
+      have pages disabled, release, and then set pages to use gh-pages as a source. (The .nojekyll prevents problems with the default github build)
+* Testing documentation locally can be accomplished by:
+    - `pip install --upgrade pip && pip install mkdocs mkdocs-gen-files pymdown-extensions`
+    - `mkdocs serve`
+    - The service will watch for markdown files and automatically rebuild
+* The file `mkdocs.yml` in the root directory of the project contains config for theme, plugins, and nav bar. The theme that we use supports only two levels of nesting in the nav bar.
+* Your pull request will be denied if any local links in the documentation are invalid.
+
+
 ## Continuous Integration
 This project uses GitHub actions to build and push the docker image as part of a pull request. 
 > :warning: You must pull from a branch, a pull request from a fork is not supported. The workaround is to first merge your changes into a branch of the target repo, and then make the pull request from the branch.

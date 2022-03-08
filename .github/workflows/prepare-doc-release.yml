@@ -1,0 +1,44 @@
+# This workflow performs markdown processing as part of prepare release
+# It only runs if markdown files are changed.
+#
+# This uses the same name and job name as prepare-release.yml.
+# There is a branch protection status check that requires a workflow
+# with this name to pass. Since thes both only run under certain conditions,
+# they both have to share the same name so that at least one of them runs.
+#
+# Othewise the pull can never be merged because no status check runs.
+# This is described here: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/troubleshooting-required-status-checks#handling-skipped-but-required-checks
+name: Prepare to release nlp-insights 
+on:
+  pull_request:
+    types: [opened, synchronize, labeled, reopened]
+    branches:
+      - main
+    paths:
+      - 'docs/**.md'
+
+jobs:
+  prepare-release:
+    # Don't change this Name, must match prepare-release.yml and a status check
+    name: Prepare release
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Checkout branch
+        run: |
+             git fetch
+             git checkout ${{ github.event.pull_request.head.ref }}
+
+      - name: Validate Documentation
+        run: |
+             pip install --upgrade pip && pip install mkdocs mkdocs-gen-files pymdown-extensions
+             mkdocs build -s
+
+      - name: noop 
+        run: echo "No docker build for doc changes"
+
+

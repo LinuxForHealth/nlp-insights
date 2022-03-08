@@ -46,7 +46,6 @@ EOF
 <details><summary>output</summary>
 
 200
-
 </details>
 
 ### Enriched condition
@@ -828,8 +827,6 @@ The nlp-insights service adds detailed information to the enriched resource to e
 ### Insight Summary
 Each coding that has been derived by NLP contains an insight summary extension that can be examined to determine which insight derived the code.
 
-For example consider the UMLS code C0559470 that was added to the allergy intolerance resource pnt123.
-
 <!--
 code to extract json object
 
@@ -839,6 +836,7 @@ select(.id == "pnt123") |
 .code.coding[] | 
 select(.code == "C0559470" and .system == "http://terminology.hl7.org/CodeSystem/umls")'
 -->
+For example consider the UMLS code C0559470 that was added to the allergy intolerance resource pnt123.
 
 <details><summary>C0559470 coding in AllergyIntolerance pnt123</summary>
 
@@ -877,9 +875,8 @@ select(.code == "C0559470" and .system == "http://terminology.hl7.org/CodeSystem
 }
 }
 ```
-
-</details><BR/>
-
+</details>
+<BR/>
 The summary extension has been added to the coding. The summary has an insight id and category.
 The insight id has a system and identifier that together identify the insight. In this example, the system tells us that the insight was discovered using ACD. The identifier value is unique (within the system) to this insight, and may be used to find the insight extension for the insight in the resource meta.
 
@@ -941,9 +938,8 @@ cat /tmp/output.json | jq -r ' .entry[].resource | select(.id == "pnt123").meta.
 }
 ```
 
-</details><br/>
-
-
+</details>
+<br/>
 The extensions of interest within the insight extension are:
 
 extension |  purpose

@@ -7,6 +7,7 @@ nlp-insights can derive new resources from:
 * DocumentReference (from the text at the path *DocumentReference.content[].attachment.data*)
 
 Two types of FHIR resources can be derived by the service:
+
 * Condition
 * MedicationStatement
 

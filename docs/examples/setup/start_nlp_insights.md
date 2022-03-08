@@ -1,4 +1,19 @@
+# Starting the nlp-insights service from the official build's container
+If you have no need to modify source code, you can run the nlp-insights service by pulling the container image.
+
+The tag of the container image is always associated with the release tag for the git repo.
+In other words, to run the service for release `v0.0.6` on local port 8998, you could execute:
+
+```
+docker login quay.io
+docker run -p 8998:5000 quay.io/alvearie/nlp-insights:0.0.6
+```
+
+:information_source: The container's tag does not include a leading "v". We currently use quay.io as our container registry, and the available tags can be accessed [here](https://quay.io/repository/alvearie/nlp-insights?tab=tags). We recommend loading images with tags that are associated with GitHub releases.
+
 # Starting the nlp-insights service for development
+Another option is to run the service by building the container from the source. This is the best way to test changes to the source.
+
 The nlp-insights service uses a gradle build to validate the source code, build the docker image, and start the service in a docker container.
 
 ## Prereqs
@@ -10,7 +25,7 @@ The nlp-insights service uses a gradle build to validate the source code, build 
 
 ### Start the nlp-insights service
 Start the service in a docker container on port 5000. `<user-id>` should be the user id for your local repository.
-Windows users should use ./gradlew.bat instead of ./gradlew
+Windows users should use `./gradlew.bat` instead of `./gradlew`.
 
 `./gradlew checkSource dockerStop dockerRemoveContainer dockerRun -PdockerUser=<user-id> -PdockerLocalPort=5000`
 

@@ -1,8 +1,14 @@
+# This does a Build, Test, Validate on ever push to a user branch
+# The idea is that testcase and source code problems are reported 
+# early...before a pull request.
+#
 name: nlp-insights PUSH Validation
 on: 
   push:
    branches-ignore:
     - 'main'
+   paths-ignore:
+    - 'docs/**.md'
 defaults:
   run:
     shell: bash

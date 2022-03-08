@@ -41,4 +41,4 @@ Default config set to: quickconfig1
 </details>
 
 ## Configuring at deploy time
-In some environments (such as k8s), it may be necessary to configure the server at deploy time, rather than with a REST API. Instructions for how to do that is located [here](../../developer/kubernetes.md).
+In some environments (such as k8s), it may be necessary to configure the server at deploy time, rather than with a REST API. Instructions for how to do that is located [here](../../user/kubernetes.md).
