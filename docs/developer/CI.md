@@ -131,19 +131,24 @@ When a commit is pushed to main, the `release.yml` workflow will create a releas
 The value of the release tag is determined from the version in the `gradle.properties` file.
 
 ### Build and publish documentation
-When a commit is pushed to main, the `build-docs.yml` workflow will run MkDocs to build the documentation and push to the gh-pages branch (root folder).
+When a commit is pushed to main, the `build-docs.yml` workflow will run MkDocs to build the documentation and push the site to the gh-pages branch (root folder).
 
 The push to the gh-pages branch will trigger the "pages build and deployment" github action. MkDocs creates the branch with a .nojekyll file so that github will deploy only, rather than build. The documentation is then available via github pages.
 
-In order for the documentation process to work the repo needs to be configured for gh-pages.
-Under Settings -> Pages, the site should be built from gh-pages / (root)
+:warning: The gh-pages branch should not be changed directly as changes will be lost on the next deploy.
 
-It may be necessary to do an initial deploy to create the branch if it does not already exist. If there is already a deployment, you might have to first
-change the source to none, and after the gh-pages branch is created, set the pages source to the branch.
+!!! tip "Testing/viewing documentation changes"
+    Because the gh-pages build happens after documentation is merged into main, you will need to build the documentation
+    locally to test and view the documentation build.
+  
+    * [install](https://www.mkdocs.org/getting-started/) MkDocs locally,
+    * `mkdocs serve` will start a service that you can connect a browser to for viewing documentation. 
+      The documenation is rebuilt when files change, so you can view changes as you make them. 
 
-MkDocs creates the branch with a `.nojekyll` file, which tells github that it should not try to render the markdown as HTML using jekyll.
+??? tip "GitHub Repo Settings for gh-pages"
+    In order for the documentation process to work the repo needs to be configured for gh-pages.
+    Under Settings -> Pages, the site should be built from gh-pages / (root)
 
-The `build-docs.yml` workflow renders the content in the gh-pages branch. This branch should not be changed directly as changes will be lost on the next deploy.
-
-For testing documentation changes, you can [install](https://www.mkdocs.org/getting-started/) MkDocs locally, and use `mkdocs serve` to view the built pages.
-
+    It may be necessary to do an initial deploy to create the branch if it does not already exist.
+    If there is already a deployment, you might have to first
+    change the source to none, and after the gh-pages branch is created set the pages source to the gh-pages branch.

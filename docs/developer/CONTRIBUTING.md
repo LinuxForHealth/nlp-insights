@@ -14,7 +14,7 @@ cannot be accepted at all!*
 
 ### Proposing new features
 
-If you would like to implement a new feature, please [raise an issue](https://github.com/LinuxForHealth/nlp-insights/issue)
+If you would like to implement a new feature, please [raise an issue](https://github.com/LinuxForHealth/nlp-insights/issues)
 before sending a pull request so the feature can be discussed. This is to avoid
 you wasting your valuable time working on a feature that the project developers
 are not interested in accepting into the code base.

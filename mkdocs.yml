@@ -65,6 +65,7 @@ markdown_extensions:
   - extra:
   - pymdownx.magiclink:
   - sane_lists:
+  - pymdownx.details
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.snippets

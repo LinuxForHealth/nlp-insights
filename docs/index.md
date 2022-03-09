@@ -26,9 +26,12 @@ Our tutorials describe how to setup and configure nlp-insights with a supported 
 
 
 ## Running the service locally
-The docker image for the container has been published, and you can pull it from [here](https://hub.docker.com/r/alvearie/nlp-insights).
+A local instance of the service can be started either by:
 
-Developers that have cloned the repo should follow the instructions for starting the service that are documented [here](./examples/setup/start_nlp_insights.md).
+* Pulling a container image from our repository.
+* Cloning our GitHub repo and building an image from the source code.
+
+The directions for both approaches can be found [here](./examples/setup/start_nlp_insights.md).
 
 Although discouraged, it is possible to [run the service outside of a docker container](./developer/run_service_no_docker.md).
 
