@@ -27,7 +27,7 @@ Example use cases, APIs, and buid documentation can be found in our official pro
 It's also very easy to build the container from source code, and the directions to do that can be found in the documentation.
 
 ## Documentation
-The official documentation is located [here](https://ntl-ibm.github.io/nlp-insights/)
+The official documentation is located [here](https://linuxforhealth.github.io/nlp-insights)
 
 ## Contributing
 We welcome contributions! Please look at our [documentation](#documentation) for details on how to begin.
