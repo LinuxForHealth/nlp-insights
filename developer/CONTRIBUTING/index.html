@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Contributing - nlp-insights</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../../css/extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Contributing";
+    var mkdocs_page_input_path = "developer/CONTRIBUTING.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> nlp-insights</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/setup/start_nlp_insights/">Start service locally</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user/http_endpoints/">HTTP Endpoints</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user/kubernetes/">Kubernetes</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">ACD Examples</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/acd_tutorial/">Overview</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/configure_acd/">Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/derive_new_resources/">Derive New Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/enrich/">Enrich Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/context_awareness/">Context Awareness</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/adverse_event/">Adverse Event</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">QuickUMLS Examples</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/quickumls_tutorial/">Overview</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/configure_quickumls/">Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/derive_new_resources/">Derive New Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/enrich/">Enrich Resources</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Integration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/fhir_integration/fhir_integration_tutorial/">FHIR Server Integration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer Guide</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Contributing</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#proposing-new-features">Proposing new features</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#fixing-bugs">Fixing bugs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#merge-approval">Merge approval</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../gradle_tasks/">Gradle Tasks</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../CI/">Continuous Integration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Unit_Tests/">Unit Tests</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../run_service_no_docker/">Run service without docker</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">nlp-insights</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Developer Guide &raquo;</li>
+        
+      
+    
+    <li>Contributing</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/ntl-ibm/nlp-insights/edit/main/docs/developer/CONTRIBUTING.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="contributing-in-general">Contributing In General</h2>
+<p>Our project welcomes external contributions. If you have an itch, please feel
+free to scratch it.</p>
+<p>To contribute code or documentation, please submit a <a href="https://github.com/LinuxForHealth/nlp-insights/pulls">pull request</a>.</p>
+<p>A good way to familiarize yourself with the codebase and contribution process is
+to look for and tackle low-hanging fruit in the <a href="https://github.com/LinuxForHealth/nlp-insights/issues">issue tracker</a>.
+Before embarking on a more ambitious contribution, please <a href="#communication">communicate</a> with us.</p>
+<p><em>We appreciate your effort, and want to avoid a situation where a contribution
+requires extensive rework (by you or by us), sits in backlog for a long time, or
+cannot be accepted at all!</em></p>
+<h3 id="proposing-new-features">Proposing new features</h3>
+<p>If you would like to implement a new feature, please <a href="https://github.com/LinuxForHealth/nlp-insights/issues">raise an issue</a>
+before sending a pull request so the feature can be discussed. This is to avoid
+you wasting your valuable time working on a feature that the project developers
+are not interested in accepting into the code base.</p>
+<h3 id="fixing-bugs">Fixing bugs</h3>
+<p>If you would like to fix a bug, please <a href="https://github.com/LinuxForHealth/nlp-insights/issues">raise an issue</a> before sending a
+pull request so it can be tracked.</p>
+<h3 id="merge-approval">Merge approval</h3>
+<p>The project maintainers use LGTM (Looks Good To Me) in comments on the code
+review to indicate acceptance. A change requires LGTMs from two of the
+maintainers of each component affected.</p>
+<h2 id="legal">Legal</h2>
+<p>Each source file must include a license header for the Apache
+Software License 2.0.</p>
+<p>We have tried to make it as easy as possible to make contributions. This
+applies to how we handle the legal aspects of contribution. We use the
+same approach - the <a href="https://github.com/hyperledger/fabric/blob/master/docs/source/DCO1.1.txt">Developer's Certificate of Origin 1.1 (DCO)</a> - that the Linux® Kernel <a href="https://elinux.org/Developer_Certificate_Of_Origin">community</a>
+uses to manage code contributions.</p>
+<p>We simply ask that when submitting a patch for review, the developer
+must include a sign-off statement in the commit message.</p>
+<p>Here is an example Signed-off-by line, which indicates that the
+submitter accepts the DCO:</p>
+<pre class="highlight"><code>Signed-off-by: John Doe &lt;john.doe@example.com&gt;</code></pre>
+<p>You can include this automatically when you commit a change to your
+local git repository using the following command:</p>
+<pre class="highlight"><code>git commit -s</code></pre>
+<h2 id="communication">Communication</h2>
+<p>Connect with us by opening an <a href="https://github.com/LinuxForHealth/nlp-insights/issues">issue</a>.</p>
+<h2 id="coding-style-guidelines">Coding style guidelines</h2>
+<p>This project makes use of several coding conventions and tools.</p>
+<h3 id="formatting">Formatting</h3>
+<p>The project is formatted using <a href="https://black.readthedocs.io/en/stable/">Black</a>. New code should continue to follow this formatter. The formatter is able to automatically format an entire source tree, however we do not have that feature included in the build. Please format before a pull request.</p>
+<h3 id="static-code-checking">Static code checking</h3>
+<p>The project uses a combination of flake8, pylint, and mypy to detect static code problems. The configuration is defined in <code>setup.cfg</code>. These checks can be run as a build task (this will also run unit tests).
+<code>./gradlew checkSource</code></p>
+<p>When making a pull request, all warnings and errors should be resolved. When a warning can be safely ignored, a 'disabling' comment should be added to the line of code that causes the problem. (This will prevent the warning from being reported by checkSource). An alternative is to modify setup.cfg so that a warning is not generated. An example of this would be to add an additional 'good-name' so that non-standard variable names are not flagged.</p>
+<h2 id="unit-tests">Unit tests</h2>
+<p>Unit tests and Doc tests are run as part of the build process. New function should include additional tests. The existing tests have great examples of how to test the NLP function. The guideline is described <a href="../Unit_Tests/">here</a></p>
+<p>Tests can be executed with the build command
+<code>./gradlew test</code></p>
+<h2 id="documentation">Documentation</h2>
+<p>When significant new function is added, the documentation should also be updated. Our documentation is built using mkdocs.</p>
+<ul>
+<li>The gh-pages environment is disabled for the repo</li>
+<li>A github action (build-docs.yml) builds the documentation and deploys to the gh-pages branch.<ul>
+<li>This happens (on-demand), or after a push to the main branch, where files have changed under docs.</li>
+<li>Because helm charts are deployed using the docs infrastructure, pushes to main will (usually) rebuild documentation.</li>
+<li>Repo should be configured so that pages is loaded from gh-pages (root directory). On initial creation of the repo, you might need to 
+  have pages disabled, release, and then set pages to use gh-pages as a source. (The .nojekyll prevents problems with the default github build)</li>
+</ul>
+</li>
+<li>Testing documentation locally can be accomplished by:<ul>
+<li><code>pip install --upgrade pip &amp;&amp; pip install mkdocs mkdocs-gen-files pymdown-extensions</code></li>
+<li><code>mkdocs serve</code></li>
+<li>The service will watch for markdown files and automatically rebuild</li>
+</ul>
+</li>
+<li>The file <code>mkdocs.yml</code> in the root directory of the project contains config for theme, plugins, and nav bar. The theme that we use supports only two levels of nesting in the nav bar.</li>
+<li>Your pull request will be denied if any local links in the documentation are invalid.</li>
+</ul>
+<h2 id="continuous-integration">Continuous Integration</h2>
+<p>This project uses GitHub actions to build and push the docker image as part of a pull request. </p>
+<blockquote>
+<p><img align="absmiddle" alt="⚠️" class="emojione" height="20px" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/26a0.png" title=":warning:" width="20px" /> You must pull from a branch, a pull request from a fork is not supported. The workaround is to first merge your changes into a branch of the target repo, and then make the pull request from the branch.</p>
+</blockquote>
+<p>The <a href="../CI/">CI pipeline</a> will take care of building and pushing the docker image, and managing releases.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../gradle_tasks/" class="btn btn-neutral float-right" title="Gradle Tasks">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../examples/fhir_integration/fhir_integration_tutorial/" class="btn btn-neutral" title="FHIR Server Integration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2022 IBM Watson Health<br></p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ntl-ibm/nlp-insights/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../../examples/fhir_integration/fhir_integration_tutorial/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../gradle_tasks/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

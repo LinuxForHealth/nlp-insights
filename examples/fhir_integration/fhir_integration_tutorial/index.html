@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>FHIR Server Integration - nlp-insights</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../../../css/extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "FHIR Server Integration";
+    var mkdocs_page_input_path = "examples/fhir_integration/fhir_integration_tutorial.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> nlp-insights</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../setup/start_nlp_insights/">Start service locally</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../user/http_endpoints/">HTTP Endpoints</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../user/kubernetes/">Kubernetes</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">ACD Examples</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../acd/acd_tutorial/">Overview</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../acd/configure_acd/">Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../acd/derive_new_resources/">Derive New Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../acd/enrich/">Enrich Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../acd/context_awareness/">Context Awareness</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../acd/adverse_event/">Adverse Event</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">QuickUMLS Examples</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../quickumls/quickumls_tutorial/">Overview</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../quickumls/configure_quickumls/">Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../quickumls/derive_new_resources/">Derive New Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../quickumls/enrich/">Enrich Resources</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Integration</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">FHIR Server Integration</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../developer/CONTRIBUTING/">Contributing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../developer/gradle_tasks/">Gradle Tasks</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../developer/CI/">Continuous Integration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../developer/Unit_Tests/">Unit Tests</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../developer/run_service_no_docker/">Run service without docker</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">nlp-insights</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Integration &raquo;</li>
+        
+      
+    
+    <li>FHIR Server Integration</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/ntl-ibm/nlp-insights/edit/main/docs/examples/fhir_integration/fhir_integration_tutorial.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <pre class="highlight"><code class="language-python">%load_ext lab_black</code></pre>
+<h1 id="integration-of-nlp-insights-with-a-fhir-server">Integration of nlp-insights with a FHIR Server</h1>
+<hr />
+<p>Although nlp-insights can be used as a standalone service, the primary intent of the service is to use it to enhance a bundle or resources, prior to posting those resources to a FHIR server.
+This notebook contains a demonstration of posting enriched resources to a FHIR server, and retrieving enriched insights and evidence for the insight.</p>
+<p><img src='../fhir_integration.png' width="75%" height="75%"></img></p>
+<h1 id="setup">Setup</h1>
+<hr />
+<p>This notebook was created with jupyter-lab 3.1.11 and python 3.9.6. Using a <a href="https://www.zainrizvi.io/blog/jupyter-notebooks-best-practices-use-virtual-environments/">virtual envirnoment</a>  is recommended. Python source code is formatted with <a href="https://pypi.org/project/nb-black/">Black</a>.</p>
+<h2 id="start-and-configure-the-nlp-insights-service">Start and configure the nlp-insights service</h2>
+<p>The examples have been written with the assumption that ACD is configured as the NLP backend for the nlp-insight service. You need to <a href="../../setup/start_nlp_insights/">start</a> and <a href="../../acd/configure_acd/">confgure</a> the nlp-insights service. Configuring the server to use <a href="../../quickumls/configure_quickumls/">QuickUMLS</a> is also an option, although the discovered insights will differ.</p>
+<h2 id="start-a-local-fhir-server">Start a local FHIR server</h2>
+<p>Although health patterns defines a much more sophisticated architecture for ingestion pipelines, these examples use the <a href="https://ibm.github.io/FHIR/">IBM FHIR server</a> running locally in a container. This keeps things simple, and allows us to focus on the value of the nlp-insights server.</p>
+<p>The server can be started locally by running the command:</p>
+<p><code>docker run -p 9443:9443 -e BOOTSTRAP_DB=true ibmcom/ibm-fhir-server</code></p>
+<h2 id="load-fhirpath-jars">Load FHIRPath Jars</h2>
+<p><a href="https://www.hl7.org/fhir/fhirpath.html">FHIRPath</a> is an HL7 standard for navigating and extracting parts of FHIR resources. These examples evaluate FHIRPath expressions by utilizing <a href="https://github.com/IBM/FHIR/tree/main/fhir-path">Java code</a> built for the IBM FHIR Server. The advantage to using FHIRPath is that the FHIRPath language is aware of features specific to FHIR resources, which makes the queries simpiler in many cases. The python interface provided in this notebook does not provide full functionality, but it is complete enough for the examples.</p>
+<p>You need to download the jars from maven centeral, and store them in the local directory indicated by FHIR_PATH_JARS (defined in a future cell).</p>
+<p>These are steps to do that (You may need to install <a href="https://maven.apache.org/">Apache Maven</a> 3.5.4 or newer):
+* Download the pom for the project <code>curl https://repo1.maven.org/maven2/com/ibm/fhir/fhir-path/4.10.2/fhir-path-4.10.2.pom &gt; pom.xml</code>
+* Download the jars <code>mvn -DoutputDirectory=. -Dartifact="com.ibm.fhir:fhir-path:4.10.0" dependency:copy dependency:copy-dependencies</code></p>
+<h2 id="third-party-libraries">Third party libraries</h2>
+<p>The examples depend on a few other libraries to make processing easier. jpype1 is used to call Java code when evaluating FHIRPath expressions.</p>
+<pre class="highlight"><code class="language-python">!pip install --upgrade pip
+!pip install pandas==1.3.5
+!pip install fhir.resources==6.1.0
+!pip install jpype1==1.3.0</code></pre>
+<pre class="codehilite"><code>Requirement already satisfied: pip in ./nlp-insights/lib/python3.9/site-packages (21.3.1)
+Requirement already satisfied: pandas==1.3.5 in ./nlp-insights/lib/python3.9/site-packages (1.3.5)
+Requirement already satisfied: pytz&gt;=2017.3 in ./nlp-insights/lib/python3.9/site-packages (from pandas==1.3.5) (2021.3)
+Requirement already satisfied: numpy&gt;=1.17.3 in ./nlp-insights/lib/python3.9/site-packages (from pandas==1.3.5) (1.22.0)
+Requirement already satisfied: python-dateutil&gt;=2.7.3 in ./nlp-insights/lib/python3.9/site-packages (from pandas==1.3.5) (2.8.2)
+Requirement already satisfied: six&gt;=1.5 in ./nlp-insights/lib/python3.9/site-packages (from python-dateutil&gt;=2.7.3-&gt;pandas==1.3.5) (1.16.0)
+Requirement already satisfied: fhir.resources==6.1.0 in ./nlp-insights/lib/python3.9/site-packages (6.1.0)
+Requirement already satisfied: pydantic[email]&gt;=1.7.2 in ./nlp-insights/lib/python3.9/site-packages (from fhir.resources==6.1.0) (1.9.0)
+Requirement already satisfied: typing-extensions&gt;=3.7.4.3 in ./nlp-insights/lib/python3.9/site-packages (from pydantic[email]&gt;=1.7.2-&gt;fhir.resources==6.1.0) (4.0.1)
+Requirement already satisfied: email-validator&gt;=1.0.3 in ./nlp-insights/lib/python3.9/site-packages (from pydantic[email]&gt;=1.7.2-&gt;fhir.resources==6.1.0) (1.1.3)
+Requirement already satisfied: dnspython&gt;=1.15.0 in ./nlp-insights/lib/python3.9/site-packages (from email-validator&gt;=1.0.3-&gt;pydantic[email]&gt;=1.7.2-&gt;fhir.resources==6.1.0) (2.1.0)
+Requirement already satisfied: idna&gt;=2.0.0 in ./nlp-insights/lib/python3.9/site-packages (from email-validator&gt;=1.0.3-&gt;pydantic[email]&gt;=1.7.2-&gt;fhir.resources==6.1.0) (3.3)
+Requirement already satisfied: jpype1==1.3.0 in ./nlp-insights/lib/python3.9/site-packages (1.3.0)
+</code></pre>
+
+<pre class="highlight"><code class="language-python">import requests
+import base64
+import json
+import urllib3
+import os
+import base64
+
+import pandas as pd
+import numpy as np</code></pre>
+<pre class="highlight"><code class="language-python">pd.set_option("display.max_colwidth", None)</code></pre>
+<h2 id="wrapper-code-to-evaluate-fhirpath-expression">Wrapper code to Evaluate FHIRPath expression</h2>
+<p>This code is used to call into the Java FHIRPath evaluation code. The details of how it works are outside the scope of nlp-insights examples. If you need more details jpype is well <a href="https://pypi.org/project/JPype1/">documented</a> and the Java code and documentation is available <a href="https://github.com/IBM/FHIR/tree/main/fhir-path">here</a>.  This seemed to be the easiest way to evaluate an expression from Python, although not all expressions are supported. If you would like to try a different implementation of FHIRPath, there are a few listed on the <a href="https://wiki.hl7.org/index.php?title=FHIRPath_Implementations">HL7 wiki</a>.</p>
+<pre class="highlight"><code class="language-python">###
+# CHANGE THIS TO THE DIRECTORY WHERE YOU DOWNLOADED THE FHIRPath JARS!!!!!
+###
+FHIR_PATH_JARS = "/home/ntl/fhir/fhir-path/*"</code></pre>
+<pre class="highlight"><code class="language-python">import jpype
+import jpype.imports
+from jpype.types import *
+
+print(f"looking for FHIRPath jars in {FHIR_PATH_JARS}")
+if not jpype.isJVMStarted():
+    jpype.startJVM(classpath=[FHIR_PATH_JARS])</code></pre>
+<pre class="codehilite"><code>looking for FHIRPath jars in /home/ntl/fhir/fhir-path/*
+</code></pre>
+
+<pre class="highlight"><code class="language-python">from java.io import ByteArrayInputStream
+import java.util.Collection
+import java.lang.String
+import java.lang.Integer
+import java.math.BigDecimal
+
+from com.ibm.fhir.path.evaluator import FHIRPathEvaluator
+from com.ibm.fhir.model.parser import FHIRParser
+from com.ibm.fhir.model.format import Format
+
+import com.ibm.fhir.path.FHIRPathElementNode
+import com.ibm.fhir.path.FHIRPathResourceNode
+
+import com.ibm.fhir.path.exception.FHIRPathException as FHIRPathException
+
+from json import JSONDecodeError
+
+
+def convert_obj(java_obj):
+    """Converts a FHIRPath Java Object to a python object"""
+    if java_obj is None:
+        return None
+
+    if isinstance(java_obj, com.ibm.fhir.path.FHIRPathResourceNode):
+        return str(java_obj.resource().toString())
+
+    if isinstance(java_obj, com.ibm.fhir.path.FHIRPathElementNode):
+        node = java_obj.element()
+        if node.hasValue():
+            node = node.getValue()
+            if isinstance(node, java.lang.String):
+                return str(node)
+            if isinstance(node, java.lang.Integer):
+                return int(node)
+            if isinstance(node, java.math.BigDecimal):
+                return int(node)
+            if isinstance(node, JArray):
+                return str(node)
+        try:
+            return json.loads(str(node.toString()))
+        except JSONDecodeError:
+            return str(node.toString())
+    elif isinstance(java_obj, java.util.Collection):
+        return [convert_obj(obj) for obj in java_obj]
+    else:
+        try:
+            return json.loads(str(java_obj.toString()))
+        except JSONDecodeError:
+            return str(java_obj.toString())
+
+    raise IllegalArgumentError(str((type(node), str(node))))
+
+
+def evaluate_fhir_path(json_str, expr_str):
+    """Evaluates an expression agains a FHIR Resource
+
+    Args:
+         json_str - FHIR resource as a json string
+         expr_str - FHIRPath expression to evaluate
+
+    Returns: Results of the evaluation, usually a list of String values.
+             May return None if no results were found
+    """
+    resource = FHIRParser.parser(Format.JSON).parse(
+        ByteArrayInputStream(json_str.encode("utf-8"))
+    )
+    try:
+        nodes = FHIRPathEvaluator.evaluator().evaluate(resource, expr_str)
+    except FHIRPathException as ex:
+        raise RuntimeError(str(ex) + "\nWith expression:\n" + expr_str)
+
+    return convert_obj(nodes)</code></pre>
+<h2 id="local-server-urls-and-ports">Local Server URLs and Ports</h2>
+<pre class="highlight"><code class="language-python"># We can be trusting of certificates for a local container
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+fhir_server = "https://fhiruser:change-password@localhost:9443/fhir-server/api/v4"
+nlp_insights_server = "http://localhost:5000"</code></pre>
+<h2 id="health-checks">Health Checks</h2>
+<pre class="highlight"><code class="language-python">fhir_health_check = requests.get(f"{fhir_server}/$healthcheck", verify=False)
+fhir_health_check.raise_for_status()
+
+insights_health_check = requests.get(f"{nlp_insights_server}/config")
+insights_health_check.raise_for_status()</code></pre>
+<h1 id="post-bundle-with-insights-into-fhir-server">POST Bundle with insights into FHIR Server</h1>
+<hr />
+<p>The input bundle is in a json file that can be viewed <a href="../input_bundle.json">here</a>.</p>
+<p>The bundle is loaded, sent to the nlp-insights service for enrichment, and then posted to the FHIR server.</p>
+<h2 id="load-bundle-without-insights">Load Bundle (without insights)</h2>
+<pre class="highlight"><code class="language-python">with open("./input_bundle.json", "r") as f:
+    bundle_json = json.load(f)</code></pre>
+<h3 id="input-bundle-summary">Input bundle Summary</h3>
+<p>We can get a rough idea of what is our input bundle using json_normalize to build a data frame. Using dataframes will make it easier to view the insights. Deeply nested JSON documents that represent FHIR resources are hard to look at; rows and columns are more familiar for human readers. Another reason for using rows and columns is that Ground Truth, or the insights that humans expect to be discovered, is often stored as rows and columns. The nlp-insights service does not include ground truth, nor is accuracy discussed in the documentation or tutorials - but accuracy must be measured for real use cases. Working with rows and columns here makes it easier to transition to other these types of analysis.</p>
+<p>Using the data frame, it's easy to see which resources and text are in the initial bundle. Also be aware that there are no code values for in the Condition and AllergyIntolerance resources.</p>
+<pre class="highlight"><code class="language-python">df = pd.json_normalize(bundle_json, record_path=["entry"])
+df["report_text"] = df["resource.presentedForm"].apply(
+    lambda f: base64.b64decode(f[0]["data"]).decode("utf-8")
+    if not pd.isnull(f)
+    else np.NaN
+)
+
+# assert that columns for codes do not exist
+assert "resource.medicationCodeableConcept.coding" not in df.columns
+assert "resource.code.coding" not in df.columns
+
+# print resource types and code text
+df.loc[:, ["resource.resourceType", "resource.code.text", "report_text"]]</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>resource.resourceType</th>
+      <th>resource.code.text</th>
+      <th>report_text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Patient</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>DiagnosticReport</td>
+      <td>Chief complaint Narrative - Reported</td>
+      <td>The patient had a myocardial infarction in 2015 and was prescribed Losartan.The patient is taking Losartan exactly as prescribed and has had no side effects.</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Condition</td>
+      <td>diabetes</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="discover-insights">Discover insights</h2>
+<p>The nlp-insights service is used to discover insights.</p>
+<pre class="highlight"><code class="language-python">nlp_insights_response = requests.post(
+    f"http://localhost:5000/discoverInsights",
+    headers={"Content-Type": "application/fhir+json"},
+    json=bundle_json,
+)
+nlp_insights_response.raise_for_status()
+enriched_bundle_json = json.loads(nlp_insights_response.text)</code></pre>
+<h3 id="enriched-bundle-summary">Enriched Bundle Summary</h3>
+<p>A quick summary of the updated bundle that was returned from the nlp-insights service verifies that a few new resources have been derived, and the prior condition and AllergyIntolerance resources have been enriched with additional codes.</p>
+<pre class="highlight"><code class="language-python">df = pd.json_normalize(enriched_bundle_json, record_path=["entry"])
+df["report_text"] = df["resource.presentedForm"].apply(
+    lambda f: base64.b64decode(f[0]["data"]).decode("utf-8")
+    if not pd.isnull(f)
+    else np.NaN
+)
+df.loc[df["resource.resourceType"] != "MedicationStatement", "codes"] = df.loc[
+    df["resource.resourceType"] != "MedicationStatement", "resource.code.coding"
+].apply(
+    lambda codes: [(code["system"], code["code"]) for code in codes]
+    if isinstance(codes, list)
+    else np.NaN
+)
+df.loc[df["resource.resourceType"] == "MedicationStatement", "codes"] = df.loc[
+    df["resource.resourceType"] == "MedicationStatement",
+    "resource.medicationCodeableConcept.coding",
+].apply(
+    lambda codes: [(code["system"], code["code"]) for code in codes]
+    if isinstance(codes, list)
+    else np.NaN
+)
+df["code_text"] = df.loc[:, "resource.code.text"].combine_first(
+    df.loc[:, "resource.medicationCodeableConcept.text"]
+)
+df.loc[
+    :,
+    [
+        "resource.resourceType",
+        "code_text",
+        "codes",
+    ],
+]</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>resource.resourceType</th>
+      <th>code_text</th>
+      <th>codes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Patient</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>DiagnosticReport</td>
+      <td>Chief complaint Narrative - Reported</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Condition</td>
+      <td>diabetes</td>
+      <td>[(http://terminology.hl7.org/CodeSystem/umls, C0011849), (http://snomed.info/sct, 73211009), (http://hl7.org/fhir/sid/icd-9-cm, 250.00), (http://hl7.org/fhir/sid/icd-10-cm, E14.9)]</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>[(http://terminology.hl7.org/CodeSystem/umls, C0559470), (http://snomed.info/sct, 91935009), (http://hl7.org/fhir/sid/icd-9-cm, 995.3), (http://hl7.org/fhir/sid/icd-10-cm, Z91.010), (http://hl7.org/fhir/sid/icd-10-cm, Z91.0)]</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>[(http://terminology.hl7.org/CodeSystem/umls, C0571417), (http://snomed.info/sct, 294505008), (http://hl7.org/fhir/sid/icd-9-cm, E930.0), (http://hl7.org/fhir/sid/icd-9-cm, 995.27), (http://hl7.org/fhir/sid/icd-10-cm, Z88.0)]</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Condition</td>
+      <td>myocardial infarction</td>
+      <td>[(http://terminology.hl7.org/CodeSystem/umls, C0027051), (http://snomed.info/sct, 22298006), (http://hl7.org/fhir/sid/icd-9-cm, 410.90), (http://hl7.org/fhir/sid/icd-10-cm, I21.9)]</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>MedicationStatement</td>
+      <td>Losartan</td>
+      <td>[(http://terminology.hl7.org/CodeSystem/umls, C0126174), (http://www.nlm.nih.gov/research/umls/rxnorm, 52175)]</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="post-resources-with-insights-to-the-fhir-server">Post resources with insights to the FHIR server</h2>
+<p>Posting the updated bundle creates the resources on the FHIR server. This also assigns identifier values to the resources. We will retrieve the patient location from the response, so that we can retrieve the resources from the server.</p>
+<pre class="highlight"><code class="language-python">fhir_server_response = requests.post(
+    f"{fhir_server}/",
+    headers={"Content-Type": "application/fhir+json"},
+    json=enriched_bundle_json,
+    verify=False,
+)
+fhir_server_response.raise_for_status()</code></pre>
+<pre class="highlight"><code class="language-python">patient_loc = evaluate_fhir_path(
+    fhir_server_response.text,
+    "Bundle.entry.response.location.where(startsWith('Patient')).getValue()",
+)[0]
+print(f"The patient's location in the FHIR Server is: {patient_loc}")</code></pre>
+<pre class="codehilite"><code>The patient's location in the FHIR Server is: Patient/17e9d5ddf75-824e1c98-1484-4079-8330-63141202c23b/_history/1
+</code></pre>
+
+<h1 id="search-for-all-the-patients-resources">Search for all the patient's resources</h1>
+<p>In the real world, there will be many resources. The sever may respond with a page at a time, and we might be interested in only a subset of resources. For this example, we'll retrieve everything for the patient; the number of resources is small enough that paging and performance cost is not a consideration.</p>
+<pre class="highlight"><code class="language-python">all_resources_response = requests.get(
+    f"{fhir_server}/{patient_loc}/$everything",
+    headers={"Accept": "application/fhir+json"},
+    verify=False,
+)
+all_resources_response.raise_for_status()</code></pre>
+<h2 id="convert-the-search-bundle-into-a-dataframe">Convert the search bundle into a DataFrame</h2>
+<p>The bundle is split into rows, where each row represents a resource in the bundle.</p>
+<pre class="highlight"><code class="language-python">from fhir.resources.bundle import Bundle
+
+resources_df = pd.DataFrame(
+    [
+        {
+            "resource_id": entry.resource.id,
+            "resource_type": type(entry.resource).__name__,
+            "resource_json": entry.resource.json(),
+        }
+        for entry in Bundle.parse_raw(all_resources_response.text).entry
+    ]
+)
+
+pd.set_option("display.max_colwidth", 75)
+display(resources_df)
+pd.set_option("display.max_colwidth", None)
+original_resources_df = resources_df  # save for later</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>resource_id</th>
+      <th>resource_type</th>
+      <th>resource_json</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>17e9d5ddf75-824e1c98-1484-4079-8330-63141202c23b</td>
+      <td>Patient</td>
+      <td>{"id": "17e9d5ddf75-824e1c98-1484-4079-8330-63141202c23b", "meta": {"la...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>{"id": "17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720", "meta": {"ex...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>{"id": "17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be", "meta": {"ex...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>17e9d5ddf76-2a1b470e-3808-442d-a1af-857b7532b740</td>
+      <td>MedicationStatement</td>
+      <td>{"id": "17e9d5ddf76-2a1b470e-3808-442d-a1af-857b7532b740", "meta": {"ex...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>17e9d5ddf75-b3eb69d7-fd03-4caf-8fe6-d8e4f2a73b2c</td>
+      <td>DiagnosticReport</td>
+      <td>{"id": "17e9d5ddf75-b3eb69d7-fd03-4caf-8fe6-d8e4f2a73b2c", "meta": {"la...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition</td>
+      <td>{"id": "17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119", "meta": {"ex...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>17e9d5ddf76-f5a481e8-1c92-4179-bb4d-2c668cc9bd66</td>
+      <td>Condition</td>
+      <td>{"id": "17e9d5ddf76-f5a481e8-1c92-4179-bb4d-2c668cc9bd66", "meta": {"ex...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h1 id="retrieve-evidence-for-derived-resources">Retrieve Evidence for Derived Resources</h1>
+<hr />
+<p>This section describes how to identify derived resources, and how to determine what information was used to derive the resource.</p>
+<h2 id="extension-urls">Extension URLs</h2>
+<p>All insight related data is stored in FHIR extensions. These extensions are defined in the <a href="https://alvearie.io/alvearie-fhir-ig/index.html">Alvearie Implementation Guide</a>.
+The type of extension is defined by the URL for the extension.</p>
+<pre class="highlight"><code class="language-python">summary_ext_url = "http://ibm.com/fhir/cdm/StructureDefinition/insight-summary"
+category_ext_url = "http://ibm.com/fhir/cdm/StructureDefinition/category"
+insight_id_ext_url = "http://ibm.com/fhir/cdm/StructureDefinition/insight-id"
+insight_ext_url = "http://ibm.com/fhir/cdm/StructureDefinition/insight"
+insight_detail_ext = "http://ibm.com/fhir/cdm/StructureDefinition/insight-detail"
+insight_reference_ext = "http://ibm.com/fhir/cdm/StructureDefinition/reference"
+insight_reference_path = "http://ibm.com/fhir/cdm/StructureDefinition/reference-path"
+insight_result_ext = "http://ibm.com/fhir/cdm/StructureDefinition/insight-result"
+insight_span_ext = "http://ibm.com/fhir/cdm/StructureDefinition/span"
+insight_offset_begin_ext = "http://ibm.com/fhir/cdm/StructureDefinition/offset-begin"
+insight_offset_end_ext = "http://ibm.com/fhir/cdm/StructureDefinition/offset-end"</code></pre>
+<h2 id="function-to-pretty-print-a-data-frame">Function to pretty print a data frame</h2>
+<p>Some dataframes have muliple lines of text in a column. This function prints those nicer for human readers.</p>
+<pre class="highlight"><code class="language-python">from IPython.display import display, HTML
+
+
+def print_df(df):
+    """This function prints a dataframe
+    that has newline characters in a column a little nicer in a notebook"""
+    # https://stackoverflow.com/questions/50644066/pandas-dataframe-and-multi-line-values
+    return display(HTML(df.to_html().replace("\\n", "&lt;br&gt;")))</code></pre>
+<h2 id="function-to-get-the-code-text">Function to get the code text</h2>
+<p>This function evaluates a FHIRPath expression against a resource to return the text associated with the code. We use this to provide a quick idea of what this resource is about.</p>
+<pre class="highlight"><code class="language-python">def get_code_text(resource) -&gt; str:
+    if txt := evaluate_fhir_path(
+        resource,
+        "Condition.code.text | "
+        "AllergyIntolerance.code.text | "
+        "MedicationStatement.medication.text",
+    ):
+        return txt[0]
+    return np.NaN</code></pre>
+<h2 id="retrieve-derived-resources">Retrieve Derived Resources</h2>
+<p>When nlp-insights creates a derived resource, it adds an insight summary extension to the resource. The summary extension contains the insight id for the insight that created the resource. We need this ID to locate the details of the insight (The details are stored in the resource's meta element). The insight identifier's system and value will be used together to uniquely identify the insight.</p>
+<h3 id="function-retrieve-insight-identifier-from-summary-extension">Function Retrieve Insight Identifier from summary extension</h3>
+<p>This function evaluates a FHIRPath exrpression to compute the insight id's system and value in the summary extension.</p>
+<pre class="highlight"><code class="language-python">def get_derived_resource_insight_id(resource):
+    """returns a string value with 'system, value' for the insight id."""
+    expr_str = (
+        f"extension('{summary_ext_url}').where("
+        f"    extension('{category_ext_url}').value.coding.code = 'natural-language-processing'"
+        f")"
+        f".extension('{insight_id_ext_url}').value.select(system + ',' + value)"
+    )
+    insights = evaluate_fhir_path(resource, expr_str)
+    return insights if insights else np.NaN</code></pre>
+<h3 id="construct-data-frame">Construct Data Frame</h3>
+<p>This dataframe contains rows for <strong>derived</strong> resources. The insight identifier's system and value are included as columns. We'll use this information to reteive the evidence for the insight that caused the resource to be derived.</p>
+<p>In addition, the <em>acd</em> in the identifier's system URI tells us that these resources were derived using ACD.</p>
+<pre class="highlight"><code class="language-python">resources_df["text"] = resources_df.loc[:, "resource_json"].apply(get_code_text)
+
+resources_df["derived_by_insight"] = resources_df.loc[:, "resource_json"].apply(
+    get_derived_resource_insight_id
+)
+resources_df = resources_df.explode("derived_by_insight")
+resources_df[["insight_id_system", "insight_id_value"]] = resources_df[
+    "derived_by_insight"
+].str.split(",", expand=True)
+resources_df = resources_df.drop(labels=["derived_by_insight"], axis="columns")
+resources_df.dropna(subset=["insight_id_system"], inplace=True)
+print_df(
+    resources_df.loc[
+        :,
+        [
+            "resource_id",
+            "resource_type",
+            "text",
+            "insight_id_system",
+            "insight_id_value",
+        ],
+    ]
+)</code></pre>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>resource_id</th>
+      <th>resource_type</th>
+      <th>text</th>
+      <th>insight_id_system</th>
+      <th>insight_id_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>17e9d5ddf76-2a1b470e-3808-442d-a1af-857b7532b740</td>
+      <td>MedicationStatement</td>
+      <td>Losartan</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>2c3514d1168072dcf3bb4a5992c76e7c37e6d7ea98cac9c169d29d12</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>17e9d5ddf76-f5a481e8-1c92-4179-bb4d-2c668cc9bd66</td>
+      <td>Condition</td>
+      <td>myocardial infarction</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>dc5541f39215bb39dd3619539d2655e172978ce61da98b0fa2206fe9</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="retrieve-source-text-that-was-used-to-derive-resources">Retrieve source text that was used to derive resources</h2>
+<p>In this section, we will use the insight extension in the meta of the Resource to determine what was used to derive the resource.</p>
+<h3 id="function-to-retrieve-reference-and-path">Function to Retrieve Reference and Path</h3>
+<p>This function evaluates a FHIRPath expression to retrieve the resource containing the text that was used to derive this resource, and the path to that text. This information can be used to load the source text. These are refered to as the "reference" and "reference path" in alvearie.</p>
+<pre class="highlight"><code class="language-python">def get_derived_from(resource, insight_id_system, insight_id_value):
+    """Returns reference;path  (separated by a semicolon)"""
+
+    # Reference and path are in the insight detail extension of the insight
+    # that we are interested in
+    expr_str = (
+        f"meta"
+        f".extension('{insight_ext_url}').where("
+        f"    extension('{insight_id_ext_url}').value.where("
+        f"        system = '{insight_id_system}' and "
+        f"        value = '{insight_id_value}'"
+        f"    ).exists()"
+        f")"
+        f".extension('{insight_detail_ext}')"
+        f".select("
+        f"    extension('{insight_reference_ext}').value.reference + ';' "
+        f"    + extension('{insight_reference_path}').value "
+        f")"
+    )
+
+    return evaluate_fhir_path(resource, expr_str)</code></pre>
+<h3 id="construct-data-frame_1">Construct Data Frame</h3>
+<p>This builds a dataframe for each resource and includes the resource and path that the insight was derived from.</p>
+<pre class="highlight"><code class="language-python">resources_df["from"] = resources_df.apply(
+    lambda row: get_derived_from(
+        row["resource_json"], row["insight_id_system"], row["insight_id_value"]
+    ),
+    axis=1,
+)
+resources_df = resources_df.explode("from")
+resources_df[["derived_from_resource", "derived_from_path"]] = resources_df[
+    "from"
+].str.split(";", expand=True)
+resources_df.drop(labels=["from"], axis="columns", inplace=True)
+
+print_df(
+    resources_df.loc[
+        :,
+        [
+            "resource_id",
+            "resource_type",
+            "text",
+            "derived_from_resource",
+            "derived_from_path",
+        ],
+    ]
+)</code></pre>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>resource_id</th>
+      <th>resource_type</th>
+      <th>text</th>
+      <th>derived_from_resource</th>
+      <th>derived_from_path</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>17e9d5ddf76-2a1b470e-3808-442d-a1af-857b7532b740</td>
+      <td>MedicationStatement</td>
+      <td>Losartan</td>
+      <td>DiagnosticReport/17e9d5ddf75-b3eb69d7-fd03-4caf-8fe6-d8e4f2a73b2c</td>
+      <td>DiagnosticReport.presentedForm[0].data</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>17e9d5ddf76-f5a481e8-1c92-4179-bb4d-2c668cc9bd66</td>
+      <td>Condition</td>
+      <td>myocardial infarction</td>
+      <td>DiagnosticReport/17e9d5ddf75-b3eb69d7-fd03-4caf-8fe6-d8e4f2a73b2c</td>
+      <td>DiagnosticReport.presentedForm[0].data</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="retrieve-source-text">Retrieve source text</h3>
+<p>In this example, both resources were derived from the same source text in the diagnostic report. The source resource can be easily retrieved from the FHIR server, and the path expression evaluated to get the text.</p>
+<pre class="highlight"><code class="language-python">source_resource, source_path = (
+    resources_df.loc[:, ["derived_from_resource", "derived_from_path"]]
+    .drop_duplicates()
+    .iloc[0]
+)</code></pre>
+<pre class="highlight"><code class="language-python">def get_source_text(resource_loc, text_path):
+    """Retrieve the resource from the FHIR server and resolve the path to the text"""
+    source_resource_fhir = requests.get(
+        f"{fhir_server}/{resource_loc}",
+        headers={"Accept": "application/fhir+json"},
+        verify=False,
+    )
+    source_resource_fhir.raise_for_status()
+    return evaluate_fhir_path(source_resource_fhir.text, source_path)[0]</code></pre>
+<pre class="highlight"><code class="language-python">get_source_text(source_resource, source_path)</code></pre>
+<pre class="codehilite"><code>'The patient had a myocardial infarction in 2015 and was prescribed Losartan.The patient is taking Losartan exactly as prescribed and has had no side effects.'
+</code></pre>
+
+<h2 id="retrieve-spans">Retrieve spans</h2>
+<p>Clinical notes are usually longer than a few sentences. It is helpful to know which words and phrases in the text caused an insight to be derived. This section shows how to retrieve the spans associated with the insight for a derived resource.</p>
+<h3 id="function-to-retrieve-spans">Function to retrieve spans</h3>
+<p>This function retrieves spans for a specific reference &amp; path within an insight. The spans are returned as a list of (start-offset, end-offset) string values.</p>
+<pre class="highlight"><code class="language-python">def get_spans(resource, insight_id_system, insight_id_value, reference, path):
+    # spans are within
+    # -&gt; Insight (must match expected system and id)
+    #    -&gt; insight detail (must match reference &amp; path)
+    #       -&gt; insight result
+    #          -&gt; span (may repeat)
+    expr_str = (
+        f"meta"
+        f".extension('{insight_ext_url}').where("
+        f"    extension('{insight_id_ext_url}').value.where("
+        f"        system = '{insight_id_system}' and value = '{insight_id_value}'"
+        f"    ).exists()"
+        f" )"
+        f".extension('{insight_detail_ext}').where("
+        f"    extension('{insight_reference_ext}').value.reference = '{reference}' and "
+        f"    extension('{insight_reference_path}').value = '{path}'"
+        f")"
+        f".extension('{insight_result_ext}')"
+        f".extension('{insight_span_ext}')"
+        f".select("
+        f"        extension('{insight_offset_begin_ext}').value.toString()  + ',' +"
+        f"        extension('{insight_offset_end_ext}').value.toString() "
+        f" )"
+    )
+    return evaluate_fhir_path(resource, expr_str)</code></pre>
+<h3 id="construct-data-frame_2">Construct Data Frame</h3>
+<p>There will be multiple rows for some insights/resources in this data frame, because there are mutliple spans that caused the resource to be derived.</p>
+<pre class="highlight"><code class="language-python">resources_df["spans"] = resources_df.apply(
+    lambda row: get_spans(
+        row["resource_json"],
+        row["insight_id_system"],
+        row["insight_id_value"],
+        row["derived_from_resource"],
+        row["derived_from_path"],
+    ),
+    axis=1,
+)
+resources_df = resources_df.explode("spans")
+
+resources_df[["span_begin", "span_end"]] = resources_df["spans"].str.split(
+    ",", expand=True
+)
+resources_df.drop(labels=["spans"], axis="columns", inplace=True)
+resources_df.loc[
+    :,
+    [
+        "resource_id",
+        "resource_type",
+        "text",
+        "derived_from_resource",
+        "derived_from_path",
+        "span_begin",
+        "span_end",
+    ],
+]</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>resource_id</th>
+      <th>resource_type</th>
+      <th>text</th>
+      <th>derived_from_resource</th>
+      <th>derived_from_path</th>
+      <th>span_begin</th>
+      <th>span_end</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>17e9d5ddf76-2a1b470e-3808-442d-a1af-857b7532b740</td>
+      <td>MedicationStatement</td>
+      <td>Losartan</td>
+      <td>DiagnosticReport/17e9d5ddf75-b3eb69d7-fd03-4caf-8fe6-d8e4f2a73b2c</td>
+      <td>DiagnosticReport.presentedForm[0].data</td>
+      <td>67</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>17e9d5ddf76-2a1b470e-3808-442d-a1af-857b7532b740</td>
+      <td>MedicationStatement</td>
+      <td>Losartan</td>
+      <td>DiagnosticReport/17e9d5ddf75-b3eb69d7-fd03-4caf-8fe6-d8e4f2a73b2c</td>
+      <td>DiagnosticReport.presentedForm[0].data</td>
+      <td>98</td>
+      <td>106</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>17e9d5ddf76-f5a481e8-1c92-4179-bb4d-2c668cc9bd66</td>
+      <td>Condition</td>
+      <td>myocardial infarction</td>
+      <td>DiagnosticReport/17e9d5ddf75-b3eb69d7-fd03-4caf-8fe6-d8e4f2a73b2c</td>
+      <td>DiagnosticReport.presentedForm[0].data</td>
+      <td>18</td>
+      <td>39</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="display-source-text-with-spans-highlighted">Display source text with spans highlighted</h3>
+<p>Once the previous dataframe has been created, it's not hard to group by the source resource and path, and display the text from that location the spans highlighted.
+In this example, the spans related to medication statements are in bold, and spans related to conditions are in italics.</p>
+<p>This type of processing is important for an application that needs to present the information that was derived from some text to a user.</p>
+<pre class="highlight"><code class="language-python">def group_of_spans_to_html(group_rows):
+    """Custom aggregate of the a data frame with "resource_type", "span_begin" and "span_end"
+    columns. The group name is a tuple of (derived_resource_location, derived_from_text_path)
+    """
+    source_text = get_source_text(group_rows.name[0], group_rows.name[1])
+
+    markup_points = []
+
+    # Points is a series of (resource_type, begin or end, offset) tuples
+    # sorted in offset ascending order
+    points = (
+        resources_df.apply(
+            lambda row: [
+                (row["resource_type"], "begin", int(row["span_begin"])),
+                (row["resource_type"], "end", int(row["span_end"])),
+            ],
+            axis=1,
+        )
+        .explode()
+        .sort_values(key=lambda series: [e[2] for e in series], ascending=True)
+    )
+
+    # tags is used to to figure out what type of HTML to insert at a given point
+    tags = {
+        "Condition": {"begin": '&lt;I&gt;&lt;span style="color: green"&gt;', "end": "&lt;/span&gt;&lt;/I&gt;"},
+        "MedicationStatement": {
+            "begin": '&lt;B&gt;&lt;span style="color: blue"&gt;',
+            "end": "&lt;/span&gt;&lt;/B&gt;",
+        },
+    }
+
+    # build the result string
+    result = []
+    cur_end = 0
+    for pt in points:
+        result.append(source_text[cur_end : pt[2]])
+        result.append(tags[pt[0]][pt[1]])
+        cur_end = pt[2]
+    result.append(source_text[cur_end:])
+
+    return "".join(result)</code></pre>
+<pre class="highlight"><code class="language-python">sources = resources_df.groupby(by=["derived_from_resource", "derived_from_path"]).apply(
+    group_of_spans_to_html
+)
+
+sources = sources.to_frame().reset_index().rename(columns={0: "text"})
+display(HTML(pd.DataFrame(sources).to_html(escape=False)))</code></pre>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>derived_from_resource</th>
+      <th>derived_from_path</th>
+      <th>text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>DiagnosticReport/17e9d5ddf75-b3eb69d7-fd03-4caf-8fe6-d8e4f2a73b2c</td>
+      <td>DiagnosticReport.presentedForm[0].data</td>
+      <td>The patient had a <I><span style="color: green">myocardial infarction</span></I> in 2015 and was prescribed <B><span style="color: blue">Losartan</span></B>.The patient is taking <B><span style="color: blue">Losartan</span></B> exactly as prescribed and has had no side effects.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="retrieve-evidence-for-enriched-resources">Retrieve Evidence for enriched resources</h1>
+<hr />
+<p>When nlp-insights derives an additional code for a resource's codings, it adds a summary extension to the code element. We'll use this extension to find the derived codes, and the evidence for those codes</p>
+<pre class="highlight"><code class="language-python"># reset datafram to all resources for the patient
+resources_df = original_resources_df
+resources_df["text"] = resources_df.loc[:, "resource_json"].apply(get_code_text)</code></pre>
+<h2 id="define-a-function-to-retrieve-codes">Define a function to retrieve codes</h2>
+<p>This FHIRPath expression returns all the codes on a resource, derived or not. The result is a list of "system,code" strings.</p>
+<pre class="highlight"><code class="language-python">def get_all_codes(resource):
+    # returns system,code  for code
+    expr_str = f"Condition.code.coding.select(system + ',' + code) | AllergyIntolerance.code.coding.select(system + ',' + code)"
+    return evaluate_fhir_path(resource, expr_str)</code></pre>
+<h2 id="define-a-function-to-retrieve-the-summary-extension-for-a-code">Define a function to retrieve the summary extension for a code</h2>
+<p>This uses a FHIRPath expression to look for the insight summary extension on a code, and retrieve a string "insight-id-system,insight-id-value"</p>
+<pre class="highlight"><code class="language-python">def get_summary_extension_for_code(resource, code_system, code_value):
+    expr_str = (
+        f"(Condition | AllergyIntolerance).code.coding.where("
+        f"    system = '{code_system}' and code = '{code_value}'"
+        f")"
+        f".extension('{summary_ext_url}').where("
+        f"    extension('{category_ext_url}').value.coding.code = 'natural-language-processing'"
+        f" )"
+        f".extension('{insight_id_ext_url}').value.select(system + ',' + value)"
+    )
+    return evaluate_fhir_path(resource, expr_str)</code></pre>
+<h2 id="construct-a-data-frame-of-derived-codes">Construct a data frame of Derived codes</h2>
+<p>This code constructs a dataframe that contains columns with the insight id system and insight id value...we can use this information to determine where the code was derived from.</p>
+<p>The <em>acd</em> in the insight id system tells us that ACD was used to derive the code.</p>
+<pre class="highlight"><code class="language-python"># Dataframe for All codes
+resources_df["code"] = resources_df.apply(
+    lambda row: get_all_codes(row["resource_json"]), axis=1
+)
+resources_df = resources_df.explode("code")
+resources_df.dropna(subset=["code"], inplace=True)
+resources_df[["code_system", "code_value"]] = resources_df["code"].str.split(
+    ",", expand=True
+)
+resources_df.drop(labels=["code"], axis="columns", inplace=True)</code></pre>
+<pre class="highlight"><code class="language-python"># Filter to only include codes with associated insights
+resources_df["summary"] = resources_df.apply(
+    lambda row: get_summary_extension_for_code(
+        row["resource_json"], row["code_system"], row["code_value"]
+    ),
+    axis=1,
+)
+resources_df = resources_df.explode("summary")
+resources_df.dropna(subset=["summary"], inplace=True)
+resources_df[["insight_id_system", "insight_id_value"]] = resources_df[
+    "summary"
+].str.split(",", expand=True)
+resources_df.loc[
+    :,
+    [
+        "resource_id",
+        "resource_type",
+        "text",
+        "code_system",
+        "code_value",
+        "insight_id_system",
+        "insight_id_value",
+    ],
+]</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>resource_id</th>
+      <th>resource_type</th>
+      <th>text</th>
+      <th>code_system</th>
+      <th>code_value</th>
+      <th>insight_id_system</th>
+      <th>insight_id_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>http://terminology.hl7.org/CodeSystem/umls</td>
+      <td>C0559470</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>31d8f5eaf30190bba2cab9a18c95306901c197f3e14a6fc68f9dc276</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>http://snomed.info/sct</td>
+      <td>91935009</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>31d8f5eaf30190bba2cab9a18c95306901c197f3e14a6fc68f9dc276</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>http://hl7.org/fhir/sid/icd-9-cm</td>
+      <td>995.3</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>31d8f5eaf30190bba2cab9a18c95306901c197f3e14a6fc68f9dc276</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>http://hl7.org/fhir/sid/icd-10-cm</td>
+      <td>Z91.010</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>31d8f5eaf30190bba2cab9a18c95306901c197f3e14a6fc68f9dc276</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>http://hl7.org/fhir/sid/icd-10-cm</td>
+      <td>Z91.0</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>31d8f5eaf30190bba2cab9a18c95306901c197f3e14a6fc68f9dc276</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>http://terminology.hl7.org/CodeSystem/umls</td>
+      <td>C0571417</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>6134e9e926a775975004b69d42e225f467b50690aa4992d98922715e</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>http://snomed.info/sct</td>
+      <td>294505008</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>6134e9e926a775975004b69d42e225f467b50690aa4992d98922715e</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>http://hl7.org/fhir/sid/icd-9-cm</td>
+      <td>E930.0</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>6134e9e926a775975004b69d42e225f467b50690aa4992d98922715e</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>http://hl7.org/fhir/sid/icd-9-cm</td>
+      <td>995.27</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>6134e9e926a775975004b69d42e225f467b50690aa4992d98922715e</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>http://hl7.org/fhir/sid/icd-10-cm</td>
+      <td>Z88.0</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>6134e9e926a775975004b69d42e225f467b50690aa4992d98922715e</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition</td>
+      <td>diabetes</td>
+      <td>http://terminology.hl7.org/CodeSystem/umls</td>
+      <td>C0011849</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>ba6da20b9ef2b1b4ed2eb1b064fb96a00126b1aacc8e9a5519df1050</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition</td>
+      <td>diabetes</td>
+      <td>http://snomed.info/sct</td>
+      <td>73211009</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>ba6da20b9ef2b1b4ed2eb1b064fb96a00126b1aacc8e9a5519df1050</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition</td>
+      <td>diabetes</td>
+      <td>http://hl7.org/fhir/sid/icd-9-cm</td>
+      <td>250.00</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>ba6da20b9ef2b1b4ed2eb1b064fb96a00126b1aacc8e9a5519df1050</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition</td>
+      <td>diabetes</td>
+      <td>http://hl7.org/fhir/sid/icd-10-cm</td>
+      <td>E14.9</td>
+      <td>urn:alvearie.io/health_patterns/services/nlp_insights/acd</td>
+      <td>ba6da20b9ef2b1b4ed2eb1b064fb96a00126b1aacc8e9a5519df1050</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="determine-how-the-code-was-derived">Determine how the code was derived</h2>
+<p>The insight extension in the meta contains the information about where the code was derived from. In the case of enrichment, this information is pretty simple. The code is always derived from the text associated with the enclosing code structure. The reference resource is always the same resource as the one being enriched. However these facts are explicitly stated in the insight extension.</p>
+<p>We can verify this with the get_derived_from method that we created earlier for the derived resources example.</p>
+<h3 id="construct-a-data-frame-with-reference-resource-and-path">Construct a Data Frame with reference resource and path</h3>
+<pre class="highlight"><code class="language-python">resources_df["from"] = resources_df.apply(
+    lambda row: get_derived_from(
+        row["resource_json"], row["insight_id_system"], row["insight_id_value"]
+    ),
+    axis=1,
+)
+resources_df = resources_df.explode("from")
+resources_df[["derived_from_resource", "derived_from_path"]] = resources_df[
+    "from"
+].str.split(";", expand=True)
+resources_df.drop(labels=["from"], axis="columns", inplace=True)
+resources_df.loc[
+    :,
+    [
+        "resource_id",
+        "resource_type",
+        "text",
+        "code_system",
+        "code_value",
+        "derived_from_resource",
+        "derived_from_path",
+    ],
+]</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>resource_id</th>
+      <th>resource_type</th>
+      <th>text</th>
+      <th>code_system</th>
+      <th>code_value</th>
+      <th>derived_from_resource</th>
+      <th>derived_from_path</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>http://terminology.hl7.org/CodeSystem/umls</td>
+      <td>C0559470</td>
+      <td>AllergyIntolerance/17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance.code.text</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>http://snomed.info/sct</td>
+      <td>91935009</td>
+      <td>AllergyIntolerance/17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance.code.text</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>http://hl7.org/fhir/sid/icd-9-cm</td>
+      <td>995.3</td>
+      <td>AllergyIntolerance/17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance.code.text</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>http://hl7.org/fhir/sid/icd-10-cm</td>
+      <td>Z91.010</td>
+      <td>AllergyIntolerance/17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance.code.text</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>http://hl7.org/fhir/sid/icd-10-cm</td>
+      <td>Z91.0</td>
+      <td>AllergyIntolerance/17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance.code.text</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>http://terminology.hl7.org/CodeSystem/umls</td>
+      <td>C0571417</td>
+      <td>AllergyIntolerance/17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance.code.text</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>http://snomed.info/sct</td>
+      <td>294505008</td>
+      <td>AllergyIntolerance/17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance.code.text</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>http://hl7.org/fhir/sid/icd-9-cm</td>
+      <td>E930.0</td>
+      <td>AllergyIntolerance/17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance.code.text</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>http://hl7.org/fhir/sid/icd-9-cm</td>
+      <td>995.27</td>
+      <td>AllergyIntolerance/17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance.code.text</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>http://hl7.org/fhir/sid/icd-10-cm</td>
+      <td>Z88.0</td>
+      <td>AllergyIntolerance/17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance.code.text</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition</td>
+      <td>diabetes</td>
+      <td>http://terminology.hl7.org/CodeSystem/umls</td>
+      <td>C0011849</td>
+      <td>Condition/17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition.code.text</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition</td>
+      <td>diabetes</td>
+      <td>http://snomed.info/sct</td>
+      <td>73211009</td>
+      <td>Condition/17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition.code.text</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition</td>
+      <td>diabetes</td>
+      <td>http://hl7.org/fhir/sid/icd-9-cm</td>
+      <td>250.00</td>
+      <td>Condition/17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition.code.text</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition</td>
+      <td>diabetes</td>
+      <td>http://hl7.org/fhir/sid/icd-10-cm</td>
+      <td>E14.9</td>
+      <td>Condition/17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition.code.text</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="retrieve-source-text_1">Retrieve source text</h3>
+<p>We can use the path from the previous data frame to retrieve the source text. While we could use the source resource's id to retrieve the source resource from the FHIR server, we know that this is always going to be the same resource as the enriched one, so for simplicity and performance we won't retrieve the resource (although we could if we wanted to).</p>
+<p>Finding the source text is then a simple matter of evaluating the derived_from_path in the previous data frame against the enriched resource.</p>
+<pre class="highlight"><code class="language-python">resources_df["source_text"] = resources_df.apply(
+    lambda row: evaluate_fhir_path(row["resource_json"], row["derived_from_path"]),
+    axis=1,
+)
+resources_df = resources_df.explode("source_text")
+resources_df.loc[
+    :,
+    [
+        "resource_id",
+        "resource_type",
+        "text",
+        "code_system",
+        "code_value",
+        "derived_from_resource",
+        "derived_from_path",
+        "source_text",
+    ],
+]</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>resource_id</th>
+      <th>resource_type</th>
+      <th>text</th>
+      <th>code_system</th>
+      <th>code_value</th>
+      <th>derived_from_resource</th>
+      <th>derived_from_path</th>
+      <th>source_text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>http://terminology.hl7.org/CodeSystem/umls</td>
+      <td>C0559470</td>
+      <td>AllergyIntolerance/17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance.code.text</td>
+      <td>peanut</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>http://snomed.info/sct</td>
+      <td>91935009</td>
+      <td>AllergyIntolerance/17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance.code.text</td>
+      <td>peanut</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>http://hl7.org/fhir/sid/icd-9-cm</td>
+      <td>995.3</td>
+      <td>AllergyIntolerance/17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance.code.text</td>
+      <td>peanut</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>http://hl7.org/fhir/sid/icd-10-cm</td>
+      <td>Z91.010</td>
+      <td>AllergyIntolerance/17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance.code.text</td>
+      <td>peanut</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance</td>
+      <td>peanut</td>
+      <td>http://hl7.org/fhir/sid/icd-10-cm</td>
+      <td>Z91.0</td>
+      <td>AllergyIntolerance/17e9d5ddf75-bc72c640-739c-4c48-b26f-774fa5446720</td>
+      <td>AllergyIntolerance.code.text</td>
+      <td>peanut</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>http://terminology.hl7.org/CodeSystem/umls</td>
+      <td>C0571417</td>
+      <td>AllergyIntolerance/17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance.code.text</td>
+      <td>amoxicillin</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>http://snomed.info/sct</td>
+      <td>294505008</td>
+      <td>AllergyIntolerance/17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance.code.text</td>
+      <td>amoxicillin</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>http://hl7.org/fhir/sid/icd-9-cm</td>
+      <td>E930.0</td>
+      <td>AllergyIntolerance/17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance.code.text</td>
+      <td>amoxicillin</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>http://hl7.org/fhir/sid/icd-9-cm</td>
+      <td>995.27</td>
+      <td>AllergyIntolerance/17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance.code.text</td>
+      <td>amoxicillin</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance</td>
+      <td>amoxicillin</td>
+      <td>http://hl7.org/fhir/sid/icd-10-cm</td>
+      <td>Z88.0</td>
+      <td>AllergyIntolerance/17e9d5ddf76-7293ecc8-8b6a-497a-881c-b6eeed1250be</td>
+      <td>AllergyIntolerance.code.text</td>
+      <td>amoxicillin</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition</td>
+      <td>diabetes</td>
+      <td>http://terminology.hl7.org/CodeSystem/umls</td>
+      <td>C0011849</td>
+      <td>Condition/17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition.code.text</td>
+      <td>diabetes</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition</td>
+      <td>diabetes</td>
+      <td>http://snomed.info/sct</td>
+      <td>73211009</td>
+      <td>Condition/17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition.code.text</td>
+      <td>diabetes</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition</td>
+      <td>diabetes</td>
+      <td>http://hl7.org/fhir/sid/icd-9-cm</td>
+      <td>250.00</td>
+      <td>Condition/17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition.code.text</td>
+      <td>diabetes</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition</td>
+      <td>diabetes</td>
+      <td>http://hl7.org/fhir/sid/icd-10-cm</td>
+      <td>E14.9</td>
+      <td>Condition/17e9d5ddf75-51cfac33-b53e-4b65-95e3-781549aab119</td>
+      <td>Condition.code.text</td>
+      <td>diabetes</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="spans">Spans</h2>
+<p>For enrichment, there are no span extensions stored in the insight detail extensions. </p>
+<p>That's because the entire text is used for the insight, along with the context of the text. (For example 'peanut' in an AllergyIntolerance should result in peanut allergy codes, not a code for a plant or food.)</p>
+<p>These text fragments contain only information related to the derived codes and the context is defined by the resource. As a result span and confidence values are not interesting.</p>
+<h1 id="summary">Summary</h1>
+<hr />
+<p>In this tutorial we:</p>
+<ul>
+<li>Created a bundle</li>
+<li>Enriched the bundle using the nlp-insights service</li>
+<li>Posted the resources to a FHIR Server</li>
+<li>Retrieved resources derived by NLP and determined what caused them to be derived</li>
+<li>Retrieved derived codes for enriched resources and determined what caused them to be derived</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../developer/CONTRIBUTING/" class="btn btn-neutral float-right" title="Contributing">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../quickumls/enrich/" class="btn btn-neutral" title="Enrich Resources"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2022 IBM Watson Health<br></p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ntl-ibm/nlp-insights/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../../quickumls/enrich/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../../developer/CONTRIBUTING/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

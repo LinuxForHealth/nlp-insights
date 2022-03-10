@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>HTTP Endpoints - nlp-insights</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../../css/extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "HTTP Endpoints";
+    var mkdocs_page_input_path = "user/http_endpoints.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> nlp-insights</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User Guide</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/setup/start_nlp_insights/">Start service locally</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">HTTP Endpoints</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#discover-insights">Discover Insights</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#discover-insights-and-non-bundle-resources">Discover Insights and non-bundle resources</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#configuration-definition">Configuration Definition</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#quickumls">QuickUmls</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#acd">ACD</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configuration-endpoints">Configuration endpoints</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../kubernetes/">Kubernetes</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">ACD Examples</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/acd_tutorial/">Overview</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/configure_acd/">Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/derive_new_resources/">Derive New Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/enrich/">Enrich Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/context_awareness/">Context Awareness</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/adverse_event/">Adverse Event</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">QuickUMLS Examples</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/quickumls_tutorial/">Overview</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/configure_quickumls/">Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/derive_new_resources/">Derive New Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/enrich/">Enrich Resources</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Integration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/fhir_integration/fhir_integration_tutorial/">FHIR Server Integration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developer/CONTRIBUTING/">Contributing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developer/gradle_tasks/">Gradle Tasks</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developer/CI/">Continuous Integration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developer/Unit_Tests/">Unit Tests</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developer/run_service_no_docker/">Run service without docker</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">nlp-insights</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>User Guide &raquo;</li>
+        
+      
+    
+    <li>HTTP Endpoints</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/ntl-ibm/nlp-insights/edit/main/docs/user/http_endpoints.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="http-endpoints">HTTP Endpoints</h1>
+<h2 id="discover-insights">Discover Insights</h2>
+<p>The discoverInsights API accepts an input bundle and returns an updated bundle with:</p>
+<ul>
+<li>Resources that have been enriched with additional codes</li>
+<li>Resources that have been derived from unstructured text (such as clinical notes) contained within the bundle's resources.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Action</th>
+<th align="center">Method</th>
+<th align="left">Endpoint</th>
+<th align="center">Body</th>
+<th align="center">Returns on Success</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Add insights</td>
+<td align="center"><code>POST</code></td>
+<td align="left"><code>/discoverInsights</code></td>
+<td align="center">FHIR bundle</td>
+<td align="center">Enriched FHIR Bundle</td>
+</tr>
+</tbody>
+</table>
+<p>Derived and Enriched types are described in the tutorials.</p>
+<ul>
+<li><a href="../../examples/acd/derive_new_resources/">Derive new resources with ACD</a></li>
+<li><a href="../../examples/acd/enrich/">Enrich resources with ACD</a></li>
+<li><a href="../../examples/quickumls/derive_new_resources/">Derive new resources with QuickUMLS</a></li>
+<li><a href="../../examples/quickumls/enrich/">Enrich resources with QuickUmls</a></li>
+</ul>
+<h3 id="discover-insights-and-non-bundle-resources">Discover Insights and non-bundle resources</h3>
+<p>If the discoverInsights API is called with a FHIR resource that is <em>not</em> a bundle, then the returned data depends on the input type:</p>
+<table>
+<thead>
+<tr>
+<th>Body Type</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DiagnosticReport or Document Reference</td>
+<td>A bundle of derived resources, or an empty bundle if no resources were derived.</td>
+</tr>
+<tr>
+<td>Condition or AllergyIntolerance</td>
+<td>The resource is returned with additional codes, or with no additional codes if no codes were derived.</td>
+</tr>
+</tbody>
+</table>
+<p>Other resource types <em>may</em> return an error.</p>
+<details class="warning">
+<summary><img align="absmiddle" alt="⚠️" class="emojione" height="20px" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/26a0.png" title=":warning:" width="20px" /> This is an experimental feature that requires resources to have a valid identifier.</summary>
+<p>When posting a resource that is not a bundle, the resource <strong>must</strong> have a valid identifier.
+The identifier allows references to the resource to be created. These references are critical for defining the source of an insight, and/or the subject (patient) that 
+resource is associated with. The identifier is assigned to a unique value by the FHIR server when the resource is created on the server.</p>
+<p>If a pipeline such as health-patterns invokes the discoverInsights API before creating the resources in thie FHIR server, then the resource's identifier has not been set yet. 
+This problem can be avoided by posting a bundle of resources.</p>
+<p>When a bundle is posted, the bundle contains a list of bundeEntry objects, with each object containing an optional fullUrl and a resource.
+nlp-insights uses the fullUrl property in the bundleEntry to indentify the resource when a reference is needed. The FHIR server will update the references to the fullUrl with the 
+actual ID when it assigns IDs for the resource.  If the fullUrl property is not set, then nlp-insights assigns a UUID to the property.
+This allows nlp-insights to process bundles <em>before</em> the FHIR server has assigned IDs for resources.</p>
+<p>The health-patterns ingestion pipline seeks to enrich the bundle with insights <em>before</em> creating resources on the FHIR server. For this reason, posting individual resources is not
+possible. Because health-patterns is the primary use of the service, posting individual resources is an experimential feature.</p>
+</details>
+<h2 id="configuration">Configuration</h2>
+<p>The app currently supports running two different NLP engine types: </p>
+<ul>
+<li><a href="https://www.ibm.com/cloud/watson-annotator-for-clinical-data">IBM's Annotator for Clinical Data (ACD)</a> and </li>
+<li><a href="https://github.com/Georgetown-IR-Lab/QuickUMLS">open-source QuickUMLS</a></li>
+</ul>
+<p>It is possible to configure as many different instances of these two engines as needed with different configuration details.</p>
+<h3 id="configuration-definition">Configuration Definition</h3>
+<p>The configuration definition jsons that are used by the APIs require a <code>name</code>, an <code>nlpServiceType</code> (either <code>acd</code> or <code>quickumls</code>), and config details specific to that type.</p>
+<h4 id="quickumls">QuickUmls</h4>
+<p>For QuickUmls, an <code>endpoint</code> is required.</p>
+<p>Sample configuration json:</p>
+<pre class="highlight"><code class="language-json">{
+  "name": "quickconfig1",
+  "nlpServiceType": "quickumls",
+  "config": {
+    "endpoint": "https://quickumls.wh-health-patterns.dev.watson-health.ibm.com/match"
+  }
+}</code></pre>
+<h4 id="acd">ACD</h4>
+<p>For ACD, an <code>endpoint</code>, an <code>apikey</code>, and a <code>flow</code> are required. The nlp-insights service is desgined to work with the
+flow <code>wh_acd.ibm_clinical_insights_v1.0_standard_flow</code>, other flows may require code modifications.</p>
+<p>Sample Configuration json:</p>
+<pre class="highlight"><code class="language-json">{
+  "name": "acdconfig1",
+  "nlpServiceType": "acd",
+  "config": {
+    "apikey": "***api key***",
+    "endpoint": "https://&lt;endpoint-url&gt;/wh-acd/api",
+    "flow": "wh_acd.ibm_clinical_insights_v1.0_standard_flow"
+  }
+}</code></pre>
+<h3 id="configuration-endpoints">Configuration endpoints</h3>
+<p>These APIs are used for configuring the NLP engine that will be used to discover insights. Successful requests will return a 2xx status code. Requests using the GET method will also respond with a json object in the response body.</p>
+<table cellspacing=0 cellpadding=0 border=0>
+<thead>
+<tr align="left"><th> &nbsp; </th><th> Method &<BR/> Endpoint</th><th> Body </th><th> Response Body on Success </th></tr>
+</thead>
+<tbody>
+<tr> <th colspan=4  align="left"> Config Definition</th></tr>
+
+<tr><td> Get All Configs </td><td> GET <BR/><I><code>/all_configs</code></I></td><td></td><td> Config definition names: 
+
+<pre class="highlight"><code class="language-json">{
+  "all_configs": [
+    "acdconfig1",
+    "quickconfig1"
+  ]
+}</code></pre>
+
+</td></tr>
+
+<tr><td> Add Named Config </td><td> PUT/POST <BR/><I><code>/config/definition</code></I></td><td> json config see:
+
+<BR/>
+<a href="#configuration-definition">Configuration Definition</a> 
+
+</td><td>Status: <CODE>204 NO CONTENT</CODE></td></tr>
+
+<tr><td> Delete Config </td><td> DELETE<BR/><I><code>/config/{configName}</code></I></td> <td></td><td>Status: <CODE>204 NO CONTENT</CODE></td></tr>
+
+<tr><td> Get Config Details </td><td> GET <BR/><I><Code>/config/{configName}</CODE></I></td><td></td><td>
+Configuration json (sensitive data will be masked):
+<br/><br/>
+
+QuickUmls Example:
+
+<pre class="highlight"><code class="language-json">{
+  "name": "quickconfig1",
+  "nlpServiceType": "quickumls",
+  "config": {
+    "endpoint": "http://endpoint/match"
+  }
+}</code></pre>
+
+ACD Example:
+
+<pre class="highlight"><code class="language-json">{
+  "name": "acdconfig1",
+  "nlpServiceType": "acd",
+  "config": {
+    "apikey": "********************************************",
+    "endpoint": "https://endpoint/api",
+    "flow": "wh_acd.ibm_clinical_insights_v1.0_standard_flow"
+  }
+}
+</code></pre>
+
+</td></tr>
+
+</tbody>
+<tbody>
+<tr><th colspan=4 align="left"> Default NLP</th></tr>
+
+<tr><td> Make Config default </td><td> POST/PUT <BR/><I><Code>/config/setDefault?name={configName}</CODE></I></td><td></td><td>Status: <CODE>204 NO CONTENT</CODE></td></tr>
+
+<tr><td> Get Current Default Config </td><td> GET <BR/><I><Code>/config</Code></I></td><td></td><td> Current default configName:
+
+<pre class="highlight"><code class="language-json">{
+  "config": "acdconfig1"
+}</code></pre>
+</td></tr>
+
+<tr><td> Clear default config </td><td> POST/PUT <BR/><I><CODE>/config/clearDefault</CODE></I></td><td> </td><td>Status: <CODE>204 NO CONTENT</CODE></td></tr>
+
+
+</tbody><tbody>
+<tr><th colspan=4 align="left"> Override NLP Engine for a resource </th></tr>
+
+<tr><td>  Get all active overrides </td><td> GET <BR/><I><CODE>/config/resource</CODE></I> </td><td></td><td>
+Dictionary of overrides:
+
+<pre class="highlight"><code class="language-json">{
+  "AllergyIntolerance": "acdconfig1",
+  "Condition": "acdconfig1"
+}</code></pre>
+
+If no overrides are defined:
+
+<pre class="highlight"><code class="language-json">{}</code></pre>
+
+</td></tr>
+
+<tr><td>Get the active override for a resource </td><td> GET <Br/><I><CODE>/config/resource/{resource}</CODE></I></td><td> </td><td>
+Dictionary of override:
+
+<pre class="highlight"><code class="language-json">{
+  "Condition": "acdconfig1"
+}</code></pre>
+
+If no override is defined:
+
+<pre class="highlight"><code class="language-json">{
+  "AllergyIntolerance": null
+}</code></pre>
+</td></tr>
+<tr><td>Add resource override</td><td>POST/PUT<br/><I><CODE>/config/resource/{resourcetype}/{configName}</CODE></I></td><td></td><td>Status: <CODE>204 NO CONTENT</CODE></td></tr>
+<tr><td>Delete a resource override</td><td>DELETE<BR/><I><CODE>/config/resource/{resourcetype}</CODE></I></td><td></td><td>Status: <CODE>204 NO CONTENT</CODE></td></tr>
+<tr><td>Delete all resource overrides</td><td>DELETE<br/><I><CODE>/config/resource</CODE></I></td><td></td><td>Status: <CODE>204 NO CONTENT</CODE></td></tr>
+</tbody>
+</table>
+
+<h1 id="error-responses">Error Responses</h1>
+<p>Responses with status codes in the 4xx range usually have a json body with a "message" property with a human readable description. Other details about the error may also be included in the structure.</p>
+<h2 id="example-response-when-an-invalid-json-is-sent-to-the-discoverinsights-api">Example response when an invalid json is sent to the discoverInsights API:</h2>
+<ul>
+<li>Status Code = 400</li>
+</ul>
+<pre class="highlight"><code class="language-json">{
+  "message": "Resource was not valid json: Expecting property name enclosed in double quotes: line 29 column 10 (char 676)"
+}</code></pre>
+<h2 id="example-response-when-an-invalid-fhir-resource-is-sent-to-the-discoverinsights-api">Example response when an invalid FHIR resource is sent to the discoverInsights API</h2>
+<ul>
+<li>Status Code = 400</li>
+</ul>
+<pre class="highlight"><code class="language-json">{
+  "message": "Resource was not valid",
+  "details": [
+    {
+      "loc": [
+        "reaction",
+        0,
+        "manifestation",
+        0,
+        "text2"
+      ],
+      "msg": "extra fields not permitted",
+      "type": "value_error.extra"
+    }
+  ]
+}</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../kubernetes/" class="btn btn-neutral float-right" title="Kubernetes">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../examples/setup/start_nlp_insights/" class="btn btn-neutral" title="Start service locally"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2022 IBM Watson Health<br></p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ntl-ibm/nlp-insights/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../../examples/setup/start_nlp_insights/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../kubernetes/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

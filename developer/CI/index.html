@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Continuous Integration - nlp-insights</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../../css/extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Continuous Integration";
+    var mkdocs_page_input_path = "developer/CI.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> nlp-insights</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/setup/start_nlp_insights/">Start service locally</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user/http_endpoints/">HTTP Endpoints</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../user/kubernetes/">Kubernetes</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">ACD Examples</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/acd_tutorial/">Overview</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/configure_acd/">Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/derive_new_resources/">Derive New Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/enrich/">Enrich Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/context_awareness/">Context Awareness</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/adverse_event/">Adverse Event</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">QuickUMLS Examples</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/quickumls_tutorial/">Overview</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/configure_quickumls/">Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/derive_new_resources/">Derive New Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/enrich/">Enrich Resources</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Integration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/fhir_integration/fhir_integration_tutorial/">FHIR Server Integration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer Guide</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING/">Contributing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../gradle_tasks/">Gradle Tasks</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Continuous Integration</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#push-new-commits-to-a-user-branch">Push new commits to a user branch</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pull-request">Pull request</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#determine-release-version">Determine release version</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#update-repository-files">Update Repository files</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#quality-verification">Quality verification</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#build-and-push-docker-image">Build and Push Docker image</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#commit-release-updates-to-git">Commit release updates to Git</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#push-commits-to-main-merge-the-pull-request">Push commits to main (Merge the pull request)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#create-release-tag">Create release tag</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#build-and-publish-documentation">Build and publish documentation</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Unit_Tests/">Unit Tests</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../run_service_no_docker/">Run service without docker</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">nlp-insights</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Developer Guide &raquo;</li>
+        
+      
+    
+    <li>Continuous Integration</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/ntl-ibm/nlp-insights/edit/main/docs/developer/CI.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="continuous-integration">Continuous Integration</h1>
+<p>This project uses Github actions to perform continuous integration tasks. 
+The ultimate goal of the CI pipeline is to ensure that when code is merged into the main branch:</p>
+<ul>
+<li>The code being merged is of high quality (tests pass)</li>
+<li>A release is created in git.</li>
+<li>There is a container image in a registry (currently <a href="https://quay.io/repository/alvearie/nlp-insights?tab=tags">quay.io</a>) that was built using the release, the image tag matches the release.</li>
+<li>All commits in the merge satisfy the <a href="https://github.com/apps/dco">DCO</a> requirements.</li>
+<li>The documentation has valid page links, and is built to the gh-pages branch. The branch is published to gh-pages. </li>
+</ul>
+<p>This makes it easy to find the latest release, the associated container image, and the latest documentation.</p>
+<p>Actions run at multiple points in the development lifecycle.</p>
+<ol>
+<li>Push new commits to a user branch</li>
+<li>Pull request</li>
+<li>Push commits to main (The result of merging a pull request)</li>
+</ol>
+<h2 id="push-new-commits-to-a-user-branch">Push new commits to a user branch</h2>
+<p>When new commits are pushed to a user branch, the <code>nlp-insights-push-validation.yml</code> workflow is invoked. The purpose of this workflow is to provide fast validation of the code that was pushed. It performs the following high level tasks.</p>
+<ul>
+<li>Unit test</li>
+<li>Static Code Analysis</li>
+<li>Docker Lint</li>
+</ul>
+<p>A coverage report from the unit tests is included in the build artifacts.</p>
+<blockquote>
+<p><img align="absmiddle" alt="👉" class="emojione" height="20px" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/1f449.png" title=":point_right:" width="20px" /> The unit test and static code analysis can be run locally with <code>./gradlew checkSource</code> (Linux) or <code>./gradlew.bat checkSource</code> (windows)</p>
+</blockquote>
+<h2 id="pull-request">Pull request</h2>
+<p>A new (candidate) release is created each time a pull request is made. 
+A candidate release means that the docker image is built, and charts in the branch are updated to point at that image as part of the build.
+The tag for the release is created later, when the pull is merged, and the release tag will be consistent with the tag of the docker image.</p>
+<blockquote>
+<p><img align="absmiddle" alt="⚠️" class="emojione" height="20px" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/26a0.png" title=":warning:" width="20px" /> A pull request must be made from a branch, a pull request from a fork is not supported.
+The workaround is to first merge your changes into a branch of the target repo, and then make the pull request from the branch.</p>
+</blockquote>
+<p>If documentation changes have been made, the documentation for the release is built for validation, but is NOT published to the gh-pages branch until the pull
+request is merged.</p>
+<p>The prepare release workflow has TWO workflow files associated with it.</p>
+<ul>
+<li><em>prepare-release.yml</em> defines a flow that runs when any non-documentation part changes. This builds the docker image and pushes it to the container repo.</li>
+<li><em>prepare-doc-release.yml</em> defines a flow that runs when any documentation part changes. This validates the markdown used in documentation.</li>
+</ul>
+<p><img align="absmiddle" alt="ℹ️" class="emojione" height="20px" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/2139.png" title=":information_source:" width="20px" /> These flows define the same "Prepare release" job name. The job name is registered as a required check that must pass before merging a pull request.
+There are two jobs because if a pull request includes only documentation, we don't want to build a new container. They have the same name because of the problem
+described <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/troubleshooting-required-status-checks#handling-skipped-but-required-checks">in the github documentation</a>. It is possible that one or both of these actions may run on a pull request.</p>
+<p>The <code>prepare-release.yml</code> workflow file includes the logic to build and tag the container image.
+This includes the following actions.</p>
+<ul>
+<li>Determine the release version number</li>
+<li>Update repository files with version number and location of the docker image</li>
+<li>Quality Verification (tests)</li>
+<li>Build &amp; Push Docker Image</li>
+<li>Commit repository changes to Git</li>
+</ul>
+<p>The <code>prepare-doc-release.yml</code> is much simpler. It builds the documentation with the <code>strict</code> option. 
+This workflow is simple validation, the documentation is not pushed anywhere.</p>
+<h3 id="configuration">Configuration</h3>
+<p><code>prepare-release.yml</code> depends on several configuration settings.</p>
+<p>The environment of the workflow file indicates the server, org, and repo
+ where the image will be stored. Changing these requires making a pull request that includes a new version of
+ the workflow with updated values (which will create an image at the new location).</p>
+<pre class="highlight"><code class="language-yaml">   jobs:
+     prepare-release:
+      name: Prepare release
+      runs-on: ubuntu-latest
+
+      env:
+        docker_server: quay.io
+        docker_org: alvearie
+        docker_repo: nlp-insights</code></pre>
+<p>The username and password that are used to log into the docker server are stored as Github secrets.
+An admin can set these by navigating to the <code>settings</code> tab, and choosing <code>Secrets</code> -&gt; <code>Actions</code> from the left hand panel.</p>
+<p>The username and password are stored in the <code>DOCKER_USERNAME</code> and <code>DOCKER_PASSWORD</code> repository secrets.</p>
+<h3 id="determine-release-version">Determine release version</h3>
+<p>A release version has the format <em>major</em>.<em>minor</em>.<em>patch</em>, where major, minor, and patch are integers 
+  A unique version number is determined by incrementing the most recent release version (including pre-releases) of the Git repo.
+  If an image exists in the container repository with the same tag as the release, the version's patch level is incremented 
+  until a unused release version is found.</p>
+<blockquote>
+<p><img align="absmiddle" alt="👉" class="emojione" height="20px" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/1f449.png" title=":point_right:" width="20px" /> A label can be added to the pull request to indicate that the pull should create a Major, Minor, or Patch release.
+If no label is added, patch is the default.  Valid labels are: <code>release-major</code>, <code>release-minor</code>, and <code>release-patch</code></p>
+</blockquote>
+<h3 id="update-repository-files">Update Repository files</h3>
+<p>Several files in the branch need to be updated with the URL for the image's org, repo and tag for the docker image.</p>
+<p>These files are:</p>
+<ul>
+<li>values.yaml</li>
+<li>chart.yaml</li>
+</ul>
+<p>The helm charts are then packaged into a *.tgz file and stored in the docs/charts directory. This makes them accessible from github.io after
+the branch is merged into main. Once packaged, a repo index is performed on docs/charts to create an index.yaml for all charts that exist in
+the directory.</p>
+<p>The version in gradle.properties is updated to the release version. This version is used when building the docker image. It is also used when merging 
+the pull to determine what release number should be created for the merge.</p>
+<p>The changes are not committed until the end of the build.</p>
+<h3 id="quality-verification">Quality verification</h3>
+<p>The build will run unit tests and perform linting and static code analysis.</p>
+<h3 id="build-and-push-docker-image">Build and Push Docker image</h3>
+<p>The docker image is built and pushed to the container registry</p>
+<h3 id="commit-release-updates-to-git">Commit release updates to Git</h3>
+<p>The prior changes to the branch are committed to Git.</p>
+<blockquote>
+<p><img align="absmiddle" alt="⚠️" class="emojione" height="20px" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/26a0.png" title=":warning:" width="20px" /> Making a pull request results in an additional commit from within an action,
+a developer will have to do a fetch and rebase to see the latest changes for these files.</p>
+</blockquote>
+<h2 id="push-commits-to-main-merge-the-pull-request">Push commits to main (Merge the pull request)</h2>
+<p>Merging the pull request results in pushing the commits in the pull to the main branch.</p>
+<h3 id="create-release-tag">Create release tag</h3>
+<p>When a commit is pushed to main, the <code>release.yml</code> workflow will create a release tag for the commit.
+The value of the release tag is determined from the version in the <code>gradle.properties</code> file.</p>
+<h3 id="build-and-publish-documentation">Build and publish documentation</h3>
+<p>When a commit is pushed to main, the <code>build-docs.yml</code> workflow will run MkDocs to build the documentation and push the site to the gh-pages branch (root folder).</p>
+<p>The push to the gh-pages branch will trigger the "pages build and deployment" github action. MkDocs creates the branch with a .nojekyll file so that github will deploy only, rather than build. The documentation is then available via github pages.</p>
+<p><img align="absmiddle" alt="⚠️" class="emojione" height="20px" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/26a0.png" title=":warning:" width="20px" /> The gh-pages branch should not be changed directly as changes will be lost on the next deploy.</p>
+<div class="admonition tip">
+<p class="admonition-title">Testing/viewing documentation changes</p>
+<p>Because the gh-pages build happens after documentation is merged into main, you will need to build the documentation
+locally to test and view the documentation build.</p>
+<ul>
+<li><a href="https://www.mkdocs.org/getting-started/">install</a> MkDocs locally,</li>
+<li><code>mkdocs serve</code> will start a service that you can connect a browser to for viewing documentation. 
+  The documenation is rebuilt when files change, so you can view changes as you make them. </li>
+</ul>
+</div>
+<details class="tip">
+<summary>GitHub Repo Settings for gh-pages</summary>
+<p>In order for the documentation process to work the repo needs to be configured for gh-pages.
+Under Settings -&gt; Pages, the site should be built from gh-pages / (root)</p>
+<p>It may be necessary to do an initial deploy to create the branch if it does not already exist.
+If there is already a deployment, you might have to first
+change the source to none, and after the gh-pages branch is created set the pages source to the gh-pages branch.</p>
+</details>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Unit_Tests/" class="btn btn-neutral float-right" title="Unit Tests">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../gradle_tasks/" class="btn btn-neutral" title="Gradle Tasks"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2022 IBM Watson Health<br></p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ntl-ibm/nlp-insights/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../gradle_tasks/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Unit_Tests/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

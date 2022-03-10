@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Start service locally - nlp-insights</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../../../css/extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Start service locally";
+    var mkdocs_page_input_path = "examples/setup/start_nlp_insights.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> nlp-insights</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User Guide</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Start service locally</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../user/http_endpoints/">HTTP Endpoints</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../user/kubernetes/">Kubernetes</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">ACD Examples</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../acd/acd_tutorial/">Overview</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../acd/configure_acd/">Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../acd/derive_new_resources/">Derive New Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../acd/enrich/">Enrich Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../acd/context_awareness/">Context Awareness</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../acd/adverse_event/">Adverse Event</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">QuickUMLS Examples</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../quickumls/quickumls_tutorial/">Overview</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../quickumls/configure_quickumls/">Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../quickumls/derive_new_resources/">Derive New Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../quickumls/enrich/">Enrich Resources</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Integration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../fhir_integration/fhir_integration_tutorial/">FHIR Server Integration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../developer/CONTRIBUTING/">Contributing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../developer/gradle_tasks/">Gradle Tasks</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../developer/CI/">Continuous Integration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../developer/Unit_Tests/">Unit Tests</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../developer/run_service_no_docker/">Run service without docker</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">nlp-insights</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>User Guide &raquo;</li>
+        
+      
+    
+    <li>Start service locally</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/ntl-ibm/nlp-insights/edit/main/docs/examples/setup/start_nlp_insights.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="starting-the-nlp-insights-service-by-pulling-a-container-from-our-repository">Starting the nlp-insights service by pulling a container from our repository</h1>
+<p>If you have no need to modify source code, you can run the nlp-insights service by pulling the container image.</p>
+<p>The tag of the container image is always associated with the release tag for the git repo.
+In other words, to run the service for release <code>v0.0.6</code> on local port 8998, you could execute:</p>
+<pre class="highlight"><code>docker login quay.io
+docker run -p 8998:5000 quay.io/alvearie/nlp-insights:0.0.6</code></pre>
+<p><img align="absmiddle" alt="ℹ️" class="emojione" height="20px" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/2139.png" title=":information_source:" width="20px" /> The container's tag does not include a leading "v". We currently use quay.io as our container registry, and the available tags can be accessed <a href="https://quay.io/repository/alvearie/nlp-insights?tab=tags">here</a>. We recommend loading images with tags that are associated with GitHub releases.</p>
+<h1 id="starting-the-nlp-insights-service-using-source-code">Starting the nlp-insights service using source code</h1>
+<p>Another option is to run the service by building the container from the source. This is the best way to test changes to the source.</p>
+<p>The nlp-insights service uses a gradle build to validate the source code, build the docker image, and start the service in a docker container.</p>
+<h2 id="prereqs">Prereqs</h2>
+<ul>
+<li>You must have a container runtime installed on your machine (such as podman or docker)</li>
+<li>You must have a python 3.9 and pip distribution</li>
+<li>The tutorials use curl to submit REST requests to the service</li>
+<li>The tutorials use jq version 1.5 for formatting and processing the json</li>
+<li>The tutorials were run in a bash shell.</li>
+</ul>
+<h3 id="start-the-nlp-insights-service">Start the nlp-insights service</h3>
+<p>Set the current working directory to the root of a clone of our GitHub repo.</p>
+<p>Use gradle to start the service in a docker container on port 5000. <code>&lt;user-id&gt;</code> should be the user id for your local repository.
+Windows users should use <code>./gradlew.bat</code> instead of <code>./gradlew</code>.</p>
+<p><code>./gradlew checkSource dockerStop dockerRemoveContainer dockerRun -PdockerUser=&lt;user-id&gt; -PdockerLocalPort=5000</code></p>
+<p>The tasks run in left to right order:</p>
+<ul>
+<li><code>checkSource</code> performs unit tests and static source code checks on the source. It is optional when not making changes.</li>
+<li><code>dockerStop</code> stops the container if it is running. This is necessary if the service is already started.</li>
+<li><code>dockerRemoveContainer</code> removes the container from your container registry. This is necessary if container has been previously registered.</li>
+<li><code>dockerRun</code> starts the container</li>
+</ul>
+<p>The <code>dockerUser</code> property should be your docker user id.
+The <code>dockerLocalPort</code> is the port the service runs on. The default is 5000, but you can change this if you have other local services already running on port 5000.</p>
+<details><summary>output</summary>
+
+<pre class="highlight"><code>&gt; Task :dockerRunStatus
+Docker container 'nlp-insights' is RUNNING.
+
+BUILD SUCCESSFUL in 1m 16s</code></pre>
+
+</details>
+
+<p>The service will now be running on port 5000.</p>
+<p><code>docker container ls</code></p>
+<details><summary>output</summary>
+
+<pre class="highlight"><code>CONTAINER ID  IMAGE                             COMMAND               CREATED        STATUS            PORTS                   NAMES
+
+592aeac44fca  localhost/ntl/nlp-insights:0.0.2  python3 -m flask ...  2 minutes ago  Up 2 minutes ago  0.0.0.0:5000-&gt;5000/tcp  nlp-insights</code></pre>
+
+</details>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../user/http_endpoints/" class="btn btn-neutral float-right" title="HTTP Endpoints">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../.." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2022 IBM Watson Health<br></p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ntl-ibm/nlp-insights/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../../.." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../../user/http_endpoints/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

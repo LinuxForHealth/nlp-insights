@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Kubernetes - nlp-insights</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../../css/extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Kubernetes";
+    var mkdocs_page_input_path = "user/kubernetes.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> nlp-insights</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">User Guide</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/setup/start_nlp_insights/">Start service locally</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../http_endpoints/">HTTP Endpoints</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Kubernetes</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#deploy-the-docker-image-to-a-kubernetes-cluster">Deploy the docker image to a kubernetes cluster</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#additonal-information">Additonal information</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuring-the-server-at-deploy-time">Configuring the server at deploy time</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#example-config-jsons">Example config jsons:</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">ACD Examples</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/acd_tutorial/">Overview</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/configure_acd/">Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/derive_new_resources/">Derive New Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/enrich/">Enrich Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/context_awareness/">Context Awareness</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/acd/adverse_event/">Adverse Event</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">QuickUMLS Examples</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/quickumls_tutorial/">Overview</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/configure_quickumls/">Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/derive_new_resources/">Derive New Resources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/quickumls/enrich/">Enrich Resources</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Integration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/fhir_integration/fhir_integration_tutorial/">FHIR Server Integration</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Developer Guide</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developer/CONTRIBUTING/">Contributing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developer/gradle_tasks/">Gradle Tasks</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developer/CI/">Continuous Integration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developer/Unit_Tests/">Unit Tests</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../developer/run_service_no_docker/">Run service without docker</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">nlp-insights</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>User Guide &raquo;</li>
+        
+      
+    
+    <li>Kubernetes</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/ntl-ibm/nlp-insights/edit/main/docs/user/kubernetes.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="kubernetes">Kubernetes</h1>
+<p>The nlp-insights service comes with helm charts so that it can be deployed to a k8s environment.</p>
+<h2 id="deploy-the-docker-image-to-a-kubernetes-cluster">Deploy the docker image to a kubernetes cluster</h2>
+<p>These instructions assume that the developer has built a new image and wants to deploy it. However you can also use an image already published, and then it would not be necessary to push a new image to the cloud's container registry.</p>
+<ol>
+<li>Log into your cloud provider and container registry. The commands to do this depend on your cloud provider.</li>
+<li>Push the docker image to the remote repository
+    <code>./gradlew dockerPush -PdockerUser=&lt;docker_user_id&gt;</code></li>
+<li>Install the helm charts (The version that was used to tag the docker image is defined in gradle.properties)<br />
+<code>helm install nlp-insights chart --set image.repository=&lt;docker_user_id&gt;/nlp-insights --set image.tag=&lt;version&gt;</code>  </li>
+<li>Wait for the pod to start running
+    <code>kubectl get pods</code>
+    (look for "nlp-insights-*")</li>
+<li>Connect to the pod's port 5000
+    <code>kubectl port-forward nlp-insights-xxxxxx-xxxx &lt;local-port&gt;:5000</code></li>
+</ol>
+<p>You can now connect to the service via localhost:<local-port></p>
+<p>Be aware that some cloud providers may require additional configuration in order for the deployment to work.</p>
+<p>For example you may need to create a pull secret. Consult your provider's documentation for details.</p>
+<h2 id="additonal-information">Additonal information</h2>
+<p>Additional information can be found in the README.md in the source tree's chart folder.</p>
+<h2 id="configuring-the-server-at-deploy-time">Configuring the server at deploy time</h2>
+<p>It is possible to provide an initial (deploy time) named configuration for quickulms and/or acd. This is especially important in a k8s environment, as the service may scale up or down transparently to the user.</p>
+<p>This is done by modifying the <code>values.yaml</code> file before deployment.  In the nlp-insights chart, the following configuration values are defined:</p>
+<pre class="highlight"><code class="language-yaml">nlpservice:
+  quickumls:
+    enableconfig: false
+    name:
+    endpoint:
+  acd:
+    enableconfig: false
+    name:
+    endpoint:
+    apikey:
+    flow:
+  default:</code></pre>
+<p>By setting the appropriate <code>enableconfig</code> flag to true and providing the <code>name</code> of the config as well as the details (dependent on the type of the nlp engine), an initial named configuration will be created.  In addition, the configuration can be made the default by setting the <code>default</code> value to one of the previously defined names.</p>
+<h3 id="example-config-jsons">Example config jsons:</h3>
+<pre class="highlight"><code>{
+  "name": "quickconfig1",
+  "nlpServiceType": "quickumls",
+  "config": {
+    "endpoint": "https://quickumlsEndpointURL/match"
+  }
+}</code></pre>
+<pre class="highlight"><code>{
+  "name": "acdconfig1",
+  "nlpServiceType": "acd",
+  "config": {
+    "apikey": "apikeyxxxxxxxxx",
+    "endpoint": "https://acdEndpointURL/api",
+    "flow": "acd_standard_flow"
+  }
+}</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../examples/acd/acd_tutorial/" class="btn btn-neutral float-right" title="Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../http_endpoints/" class="btn btn-neutral" title="HTTP Endpoints"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2022 IBM Watson Health<br></p>
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ntl-ibm/nlp-insights/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../http_endpoints/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../examples/acd/acd_tutorial/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
