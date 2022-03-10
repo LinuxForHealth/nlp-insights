@@ -17,8 +17,8 @@ Process ACD output and derive adverse events
 from typing import List
 from typing import cast
 
-from fhir.resources.codeableconcept import CodeableConcept
 from fhir.resources.adverseevent import AdverseEvent
+from fhir.resources.codeableconcept import CodeableConcept
 from ibm_whcs_sdk.annotator_for_clinical_data import ContainerAnnotation
 from ibm_whcs_sdk.annotator_for_clinical_data.annotator_for_clinical_data_v1 import (
     InsightModelData,
@@ -40,7 +40,7 @@ class AdverseEventBuilder(abstract_builder.ResourceBuilder):
         self,
         text_source: UnstructuredText,
         acd_output: ContainerAnnotation,
-        nlp_config: AcdNlpConfig
+        nlp_config: AcdNlpConfig,
     ):
         super().__init__(text_source, acd_output, nlp_config, AdverseEvent)
 
@@ -48,7 +48,7 @@ class AdverseEventBuilder(abstract_builder.ResourceBuilder):
         self,
         first_acd_attr: attribute.AttributeWithSource,
     ) -> AdverseEvent:
-        actuality_value = "potential"
+        actuality_value = "actual"
 
         # The following block is designed to handle meddra codes if they are present
         # in the ACD output. Commenting out for now but can be activated at a later time.
@@ -92,7 +92,9 @@ class AdverseEventBuilder(abstract_builder.ResourceBuilder):
         # if is_confirmed < 0.5:
         #     actuality_value = "actual"
 
-        a_e = AdverseEvent.construct(subject=self.text_source.subject, actuality=actuality_value)
+        a_e = AdverseEvent.construct(
+            subject=self.text_source.subject, actuality=actuality_value
+        )
 
         return a_e
 

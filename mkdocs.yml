@@ -1,0 +1,86 @@
+# This yaml determines the theme and settings used by MkDocs to publish documentation
+# go gh-pages.
+#
+# The CI pipeline will invoke mkdocs to render HTML from the markdown and push those 
+# files to the branch gh-pages.
+#
+# The GitHub repo must be configured with the gh-pages branch (root dir) as the source.
+# MkDocs is different from the default jekyll that is available out of the box with
+# GitHub, but it has way better nav features.
+#
+# Only the latest version of the documentation is published.
+# There is mike tool that supports versioning but this adds more complexity than 
+# we need at this time.
+#  https://squidfunk.github.io/mkdocs-material/setup/setting-up-versioning/
+site_name: "nlp-insights"
+repo_url: "https://github.com/ntl-ibm/nlp-insights"
+edit_uri: ./edit/main/docs
+
+
+# There are a couple of supported themes available, this one looks the
+# best with our content.
+# It does not have the TOC on the right, the way that Material does, and this
+# allows more columns to be displayed for tables and source code.
+# The bad news is the the NAV bar on the left only supports two levels of 
+# nesting. For now that's OK.
+theme:
+  name: readthedocs 
+
+# This is what the NAV bar on the left comes from.
+# As mentioned before, readthedocs supports only two levels of nesting.
+nav:
+  - "Home": "./index.md"
+  - "User Guide":
+          - "Start service locally" : "./examples/setup/start_nlp_insights.md"
+          - "HTTP Endpoints": "./user/http_endpoints.md"
+          - "Kubernetes" : "./user/kubernetes.md"
+  - "ACD Examples":
+          - "Overview": "./examples/acd/acd_tutorial.md"
+          - "Configuration" : "./examples/acd/configure_acd.md"
+          - "Derive New Resources": "./examples/acd/derive_new_resources.md"
+          - "Enrich Resources": "./examples/acd/enrich.md"
+          - "Context Awareness" : "./examples/acd/context_awareness.md"
+          - "Adverse Event" : "./examples/acd/adverse_event.md"
+  - "QuickUMLS Examples":
+          - "Overview": "./examples/quickumls/quickumls_tutorial.md"
+          - "Configuration" : "./examples/quickumls/configure_quickumls.md"
+          - "Derive New Resources": "./examples/quickumls/derive_new_resources.md"
+          - "Enrich Resources": "./examples/quickumls/enrich.md"
+  - "Integration": 
+          - "FHIR Server Integration" : "examples/fhir_integration/fhir_integration_tutorial.md"
+
+  - "Developer Guide":
+          - "Contributing" : "./developer/CONTRIBUTING.md"
+          - "Gradle Tasks" : "./developer/gradle_tasks.md"
+          - "Continuous Integration" : "./developer/CI.md"
+          - "Unit Tests" : "./developer/Unit_Tests.md"
+          - "Run service without docker" : "developer/run_service_no_docker.md"
+plugins:
+  - search:
+      separator: '[\s\-\.]+'
+
+markdown_extensions:
+  - admonition:
+  - codehilite:
+  - extra:
+  - pymdownx.magiclink:
+  - sane_lists:
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.snippets
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.emoji:
+          emoji_generator: !!python/name:pymdownx.emoji.to_png
+          options:
+            attributes:
+               align: "absmiddle"
+               height: "20px"
+               width: "20px"
+
+extra_css:
+  - css/extra.css
+
+
+copyright: 'Copyright &copy; 2022 IBM Watson Health<br>'

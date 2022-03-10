@@ -22,7 +22,7 @@ Be aware that some cloud providers may require additional configuration in order
 For example you may need to create a pull secret. Consult your provider's documentation for details.
 
 ## Additonal information
-Additional information can be found in the [README](../../chart/README.md) for the helm charts.
+Additional information can be found in the README.md in the source tree's chart folder.
 
 ## Configuring the server at deploy time
 
@@ -31,7 +31,7 @@ It is possible to provide an initial (deploy time) named configuration for quick
 
 This is done by modifying the `values.yaml` file before deployment.  In the nlp-insights chart, the following configuration values are defined:
 
-```
+```yaml
 nlpservice:
   quickumls:
     enableconfig: false
@@ -44,7 +44,7 @@ nlpservice:
     apikey:
     flow:
   default:
-  ```
+```
 
 By setting the appropriate `enableconfig` flag to true and providing the `name` of the config as well as the details (dependent on the type of the nlp engine), an initial named configuration will be created.  In addition, the configuration can be made the default by setting the `default` value to one of the previously defined names.
 

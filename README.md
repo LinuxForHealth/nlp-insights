@@ -1,5 +1,5 @@
 # NLP Insights
-A Rest service for updating bundles of FHIR resources with discovered insights.
+A reference implementation of a rest service to update bundles of FHIR resources with discovered insights.
 The service is implemented as a Flask API within a docker container.
 
 ## Purpose
@@ -9,47 +9,28 @@ The primary purpose of the discover insights API is to accept a bundle of FHIR r
 * New resources may have been derived from unstructured text (such as clinical notes) contained within the bundle's resources. 
   - For example a DiagnosticReport that says *the patient had a myocardial infarction* might result in a derived Condition resource being added to the bundle.
 
-
-## Supported NLP Engines
-The nlp-insights service requires an NLP engine service to perform NLP related tasks. We support two NLP services.
-
-* IBM's [Annotator for Clinical Data (ACD)](https://www.ibm.com/cloud/watson-annotator-for-clinical-data) and 
-* Open-source [QuickUMLS](https://github.com/Georgetown-IR-Lab/QuickUMLS)
-
-
 ## Quick Start
-Our tutorials describe how to setup and configure nlp-insights with a supported NLP service. They also provide extensive description of how resources are derived and enriched:
+You can pull the latest release from quay.io. 
 
-* [Tutorial for using the nlp-insights service with QuickUMLS](./docs/examples/quickumls/quickumls_tutorial.md)
-* [Tutorial for using the nlp-insights service with ACD](./docs/examples/acd/acd_tutorial.md)
+The tag of the container image is always associated with the release tag for the git repo.
+In other words, to run the service for release v0.0.6 on local port 8998, you could execute:
 
+```
+docker login quay.io
+docker run -p 8998:5000 quay.io/alvearie/nlp-insights:0.0.6
+```
 
-## Running the service locally
-The docker image for the container has been published, and you can pull it from [here](https://hub.docker.com/r/alvearie/nlp-insights).
+The container's tag does not include a leading "v". The available tags can be accessed [here](https://quay.io/repository/alvearie/nlp-insights?tab=tags). We recommend loading images with tags that are associated with tagged releases in GitHub.
 
-Developers that have cloned the repo should follow the instructions for starting the service that are documented [here](./docs/examples/setup/start_nlp_insights.md).
+Example use cases, APIs, and buid documentation can be found in our official product [documentation](#documentation).
 
-Although discouraged, it is possible to [run the service outside of a docker container](./docs/developer/run_service_no_docker.md).
+It's also very easy to build the container from source code, and the directions to do that can be found in the documentation.
 
-## Kubernetes
-The nlp-insights service is designed to be part of a larger health-patterns ingestion and enrichment pipeline. Helm charts are included so that the service can be deployed to kubernetes. The deployed service can then be integrated into a pipeline.
-
-More details on deployment and configuration in a k8s environment are discussed [here](./docs/developer/kubernetes.md)
-
-## HTTP Endpoints
-The HTTP APIs for the service are described [here](./docs/developer/http_endpoints.md).
-These APIs allow you to:
-
-* Define the connection to the NLP engine service(s),
-* Select the default NLP engine that will be used for insight discovery
-* Discover insights
-* Override the default engine and use a different NLP engine for one or more resource types
-
-## Build
-We use gradle for all build and test related tasks. The important features are documented [here](./docs/developer/gradle_tasks.md).
+## Documentation
+The official documentation is located [here](https://linuxforhealth.github.io/nlp-insights)
 
 ## Contributing
-We welcome contributions! Please look at our [contributing guide](./docs/developer/CONTRIBUTING.md) for details on how to begin.
+We welcome contributions! Please look at our [documentation](#documentation) for details on how to begin.
 
 
 ## License

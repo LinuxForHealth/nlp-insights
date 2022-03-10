@@ -2,6 +2,7 @@
 
 ## Discover Insights
 The discoverInsights API accepts an input bundle and returns an updated bundle with:
+
 * Resources that have been enriched with additional codes
 * Resources that have been derived from unstructured text (such as clinical notes) contained within the bundle's resources.
  
@@ -16,9 +17,9 @@ Derived and Enriched types are described in the tutorials.
 * [Derive new resources with QuickUMLS](../examples/quickumls/derive_new_resources.md)
 * [Enrich resources with QuickUmls](../examples/quickumls/enrich.md)
 
-<details><summary>Experimental support for non-bundle resources</summary>
+### Discover Insights and non-bundle resources
 
-If the discoverInsights API is called with a FHIR resource that is *Not* a bundle, then the returned data depends on the input type:
+If the discoverInsights API is called with a FHIR resource that is *not* a bundle, then the returned data depends on the input type:
  
  Body Type | Returns 
  --- | ---
@@ -27,13 +28,27 @@ If the discoverInsights API is called with a FHIR resource that is *Not* a bundl
 
 Other resource types *may* return an error.
 
-When using this API resources __must__ have a valid identifier. Because health-patterns will invoke the service before creating resources in thie FHIR server, the identifier has not been set. The result is that this version of the API is not as useful in an ingestion pipeline, and therefore is discouraged/experimental.
+??? Warning ":warning: This is an experimental feature that requires resources to have a valid identifier."
 
-The version of the API that accepts a bundle input makes use of the fullUrl property in the bundleEntry for each resource (setting the property if necessary), and this allows that variation to support the requirements of health-patterns.
-</details>
+
+    When posting a resource that is not a bundle, the resource __must__ have a valid identifier.
+    The identifier allows references to the resource to be created. These references are critical for defining the source of an insight, and/or the subject (patient) that 
+    resource is associated with. The identifier is assigned to a unique value by the FHIR server when the resource is created on the server.
+
+    If a pipeline such as health-patterns invokes the discoverInsights API before creating the resources in thie FHIR server, then the resource's identifier has not been set yet. 
+    This problem can be avoided by posting a bundle of resources.
+
+    When a bundle is posted, the bundle contains a list of bundeEntry objects, with each object containing an optional fullUrl and a resource.
+    nlp-insights uses the fullUrl property in the bundleEntry to indentify the resource when a reference is needed. The FHIR server will update the references to the fullUrl with the 
+    actual ID when it assigns IDs for the resource.  If the fullUrl property is not set, then nlp-insights assigns a UUID to the property.
+    This allows nlp-insights to process bundles *before* the FHIR server has assigned IDs for resources.
+
+    The health-patterns ingestion pipline seeks to enrich the bundle with insights *before* creating resources on the FHIR server. For this reason, posting individual resources is not
+    possible. Because health-patterns is the primary use of the service, posting individual resources is an experimential feature.
 
 ## Configuration
 The app currently supports running two different NLP engine types: 
+
 * [IBM's Annotator for Clinical Data (ACD)](https://www.ibm.com/cloud/watson-annotator-for-clinical-data) and 
 * [open-source QuickUMLS](https://github.com/Georgetown-IR-Lab/QuickUMLS)
 
@@ -97,15 +112,18 @@ These APIs are used for configuring the NLP engine that will be used to discover
 
 </td></tr>
 
-<tr><td> Add Named Config </td><td> PUT/POST <BR/><I><code>/config/definition</code></I></td><td>json config see:
+<tr><td> Add Named Config </td><td> PUT/POST <BR/><I><code>/config/definition</code></I></td><td> json config see:
 
-* [Configuration Definition](#configuration-definition)
+<BR/>
+<a href="#configuration-definition">Configuration Definition</a> 
 
 </td><td>Status: <CODE>204 NO CONTENT</CODE></td></tr>
 
 <tr><td> Delete Config </td><td> DELETE<BR/><I><code>/config/{configName}</code></I></td> <td></td><td>Status: <CODE>204 NO CONTENT</CODE></td></tr>
 
-<tr><td> Get Config Details </td><td> GET <BR/><I><Code>/config/{configName}</CODE></I></td><td></td><td> Configuration json (sensitive data will be masked):
+<tr><td> Get Config Details </td><td> GET <BR/><I><Code>/config/{configName}</CODE></I></td><td></td><td>
+Configuration json (sensitive data will be masked):
+<br/><br/>
 
 QuickUmls Example:
 

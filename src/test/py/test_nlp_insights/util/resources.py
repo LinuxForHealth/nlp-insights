@@ -27,7 +27,12 @@ class UnitTestUsingExternalResource(unittest.TestCase):
         )
 
     def expected_output_path(self) -> str:
-        for sf in inspect.stack():
-            if sf[3].startswith("test_"):
-                return f"{self.resource_path}/expected_results/{type(self).__name__}/{sf[3]}.json"
+        """Determines the directory where the expected results for a test
+        will be stored."""
+        for stack_frame in inspect.stack():
+            if stack_frame[3].startswith("test_"):
+                dir_name = (
+                    f"{self.resource_path}/expected_results/{type(self).__name__}"
+                )
+                return f"{dir_name}/{stack_frame[3]}.json"
         raise RuntimeError('Must be called from within a "test_" method')

@@ -1,37 +1,61 @@
-## Welcome to GitHub Pages
+# NLP Insights
+A Rest service for updating bundles of FHIR resources with discovered insights.
+The service is implemented as a Flask API within a docker container.
 
-You can use the [editor on GitHub](https://github.com/LinuxForHealth/nlp-insights/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+## Purpose
+The primary purpose of the discover insights API is to accept a bundle of FHIR resources and to return an updated bundle that includes discovered insights.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+* Resources in the bundle may have been enriched by adding additional codes. 
+  - For example an AllergyIntolerance resource for a peanut allergy might have UMLS code C0559470 or SNOMED-CT code 91935009 added to it.
+* New resources may have been derived from unstructured text (such as clinical notes) contained within the bundle's resources. 
+  - For example a DiagnosticReport that says *the patient had a myocardial infarction* might result in a derived Condition resource being added to the bundle.
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Supported NLP Engines
+The nlp-insights service requires an NLP engine service to perform NLP related tasks. We support two NLP services.
 
-```markdown
-Syntax highlighted code block
+* IBM's [Annotator for Clinical Data (ACD)](https://www.ibm.com/cloud/watson-annotator-for-clinical-data) and 
+* Open-source [QuickUMLS](https://github.com/Georgetown-IR-Lab/QuickUMLS)
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+## Quick Start
+Our tutorials describe how to setup and configure nlp-insights with a supported NLP service. They also provide extensive description of how resources are derived and enriched:
 
-1. Numbered
-2. List
+* [Tutorial for using the nlp-insights service with QuickUMLS](./examples/quickumls/quickumls_tutorial.md)
+* [Tutorial for using the nlp-insights service with ACD](./examples/acd/acd_tutorial.md)
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
+## Running the service locally
+A local instance of the service can be started either by:
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+* Pulling a container image from our repository.
+* Cloning our GitHub repo and building an image from the source code.
 
-### Jekyll Themes
+The directions for both approaches can be found [here](./examples/setup/start_nlp_insights.md).
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/LinuxForHealth/nlp-insights/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Although discouraged, it is possible to [run the service outside of a docker container](./developer/run_service_no_docker.md).
 
-### Support or Contact
+## Kubernetes 
+The nlp-insights service is designed to be part of a larger health-patterns ingestion and enrichment pipeline. Helm charts are included so that the service can be deployed to kubernetes. The deployed service can then be integrated into a pipeline.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+More details on deployment and configuration in a k8s environment are discussed [here](./user/kubernetes.md)
+
+## HTTP Endpoints
+The HTTP APIs for the service are described [here](./user/http_endpoints.md).
+These APIs allow you to:
+
+* Define the connection to the NLP engine service(s),
+* Select the default NLP engine that will be used for insight discovery
+* Discover insights
+* Override the default engine and use a different NLP engine for one or more resource types
+
+## Build
+We use gradle for all build and test related tasks. The important features are documented [here](./developer/gradle_tasks.md).  
+Continuous Integration and documentation publishing is done with GitHub Actions, which is documented [here](./developer/CI.md).
+
+## Contributing
+We welcome contributions! Please look at our [contributing guide](./developer/CONTRIBUTING.md) for details on how to begin.
+ 
+
+## License
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 

@@ -1,3 +1,14 @@
+# This adds the release tag on pushes to main
+# iff the release defined by gradle.properties 
+# does not already have a tag.
+# A Case where a new release would not be created might be a doc only update.
+#
+# Releases are created as pre-releases, which tells consumers that
+# the release isn't ready for production (or general use in our case).
+# To make the release "official", go the the repo on the web:
+#  - choose Releases (from the right nav bar), 
+#  - Edit the release
+#  - Uncheck "This is a pre-release"
 name: Add a release tag for nlp-insights 
 on:
   push:
@@ -15,7 +26,10 @@ jobs:
           fetch-depth: 0
       - name: Calculate Tag
         run:  echo "TAG=v$(grep -oP 'version\=\K([0-9]+\.[0-9]+\.[0-9]+)' gradle.properties)" >> $GITHUB_ENV
+      - name: Check if the release already exists
+        run:  echo "EXISTS=$(wget -q https://api.github.com/repos/ntl-ibm/nlp-insights/releases -O - | jq 'any(.[].tag_name == env.TAG; .)')" >> $GITHUB_ENV
       - name: Create Release
+        if: ${{ env.EXISTS != 'true' }}
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

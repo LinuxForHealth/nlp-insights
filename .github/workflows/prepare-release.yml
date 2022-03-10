@@ -1,12 +1,26 @@
+# This workflow performs the container image build as part of prepare release
+# It runs if any files other than markdown files are changed.
+#
+# This uses the same name and job name as prepare-doc-release.yml.
+# There is a branch protection status check that requires a workflow
+# with this name to pass. Since thes both only run under certain conditions,
+# they both have to share the same name so that at least one of them runs.
+#
+# Othewise the pull can never be merged because no status check runs.
+# This is described here: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/troubleshooting-required-status-checks#handling-skipped-but-required-checks
 name: Prepare to release nlp-insights 
 on:
   pull_request:
     types: [opened, synchronize, labeled, reopened]
     branches:
       - main
+    paths-ignore:
+      - 'docs/**.md'
 
 jobs:
   prepare-release:
+    # Don't change this name, must match prepare-doc-release.yml,
+    # must match status check name
     name: Prepare release
     runs-on: ubuntu-latest
 
@@ -68,7 +82,14 @@ jobs:
 
       - name: Docker Lint
         run:  dockerlint
-
+      # We don't want to continue this build and indicate success if something
+      # is wrong with the docs. This is usually a quick operation so doing it
+      # even if no documentation changed is not a problem, we'll always publish the
+      # docs, because that is where the charts get archived.
+      - name: Validate Documentation
+        run: |
+             pip install --upgrade pip && pip install mkdocs mkdocs-gen-files pymdown-extensions
+             mkdocs build -s      
       - name: Push Docker Image
         run: |
              ./gradlew dockerPush -PdockerUser=${{ env.docker_server }}/${{ env.docker_org }}

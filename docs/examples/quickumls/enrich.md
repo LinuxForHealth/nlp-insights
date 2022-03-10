@@ -41,13 +41,10 @@ curl  -w "\n%{http_code}\n" -s -o /tmp/output.json -XPOST localhost:5000/discove
 }
 EOF
 ```
-
 <details><summary>output</summary>
-
 200
-
 </details>
-
+<BR/>  
 ### Enriched condition
 A bundle with the enriched condition is returned from the service.
 
@@ -157,10 +154,8 @@ A bundle with the enriched condition is returned from the service.
   "resourceType": "Bundle"
 }
 ```
-
 </details>
-
-
+<BR/>
 ### Condition derived codes
 Quick UMLS understands UMLS concept codes. As a result a code has been added to the resource.
 
@@ -441,7 +436,7 @@ A bundle is returned that contains the enriched allergy intolerance resources. E
 }
 ```
 </details>
-
+<BR/>
 ### Allergy Intolerance derived codes
 The food allergy resource has been enriched with a new code.
 
@@ -527,8 +522,8 @@ select(.code == "C0559470" and .system == "http://terminology.hl7.org/CodeSystem
 }
 ```
 
-</details><BR/>
-
+</details>
+<BR/>
 The summary extension has been added to the coding. The summary has an insight id and category.
 The insight id has a system and identifier that together identify the insight. In this example, the system tells us that the insight was discovered using QuickUMLS. The identifier value is unique (within the system) to this insight, and may be used to find the insight extension for the insight in the resource meta.
 
@@ -589,10 +584,8 @@ cat /tmp/output.json | jq -r ' .entry[].resource | select(.id == "wxyz-123").met
   "url": "http://ibm.com/fhir/cdm/StructureDefinition/insight"
 }
 ```
-
-</details><br/>
-
-
+</details>
+<br/>
 The extensions of interest within the insight extension are:
 
 extension |  purpose

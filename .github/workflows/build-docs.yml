@@ -1,0 +1,36 @@
+# This runs when either mkdocs.yml or anything in the docs directory 
+# is changed, and the change is pushed to main.
+#
+# It will deploy the rendered HTML to a gh-pages branch.
+#
+# GitHub should be setup to use this branch's root dir as a source
+# for gh-pages. When changes are pushed to the branch, a GitHub action
+# will publish the changes to the pages environment.
+#
+# The gh-pages branch should never be modified, except by this action.
+# Part of the deploy is deleting existing files.
+name: Documentation
+
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/**"
+      - "mkdocs.yml"
+  workflow_dispatch:
+  
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v2
+      - run: pip install --upgrade pip && pip install mkdocs mkdocs-gen-files pymdown-extensions
+      - run: git config user.name ${{ github.actor }} && git config user.email "${{ github.actor }}@users.noreply.github.com"
+      - name: Publish docs
+        run: mkdocs gh-deploy
+
