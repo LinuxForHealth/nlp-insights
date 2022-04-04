@@ -3,9 +3,9 @@ entries:
   nlp-insights:
   - apiVersion: v2
     appVersion: 0.1.3
-    created: "2022-03-09T20:39:30.438685533Z"
+    created: "2022-04-04T13:28:46.516096-05:00"
     description: A Helm Chart to deploy the NLP Insights service.
-    digest: 286099b95180065ebe50b78cf2f5daa8d2d76a4fa51f46ad16e834332db9e902
+    digest: 6f9bc410734801688f961ca1099568ea174f135343716e2e084a99b7e8e1a2b4
     home: https://github.com/LinuxForHealth/nlp-insights
     keywords:
     - ibm
@@ -22,7 +22,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2022-03-09T20:39:30.437815031Z"
+    created: "2022-04-04T13:28:46.515552-05:00"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: 42bed86de1f193821ca0a58269a44bdfa575d258be5b1b3950d0c64d9d5aa25a
     home: https://github.com/LinuxForHealth/nlp-insights
@@ -41,7 +41,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-03-09T20:39:30.437242729Z"
+    created: "2022-04-04T13:28:46.514733-05:00"
     description: A Helm Chart to deploy the NLP Insights service.
     digest: 0f23831266fa1c80fe75cc2cd8b35bb9325d047ac6470843d8624568ba73f7c7
     home: https://github.com/Alvearie/health-patterns/tree/main/services/nlp-insights
@@ -58,4 +58,4 @@ entries:
     urls:
     - nlp-insights-0.1.0.tgz
     version: 0.1.0
-generated: "2022-03-09T20:39:30.435180423Z"
+generated: "2022-04-04T13:28:46.512953-05:00"
