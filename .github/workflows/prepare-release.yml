@@ -22,7 +22,7 @@ jobs:
     # Don't change this name, must match prepare-doc-release.yml,
     # must match status check name
     name: Prepare release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04 
 
     env:
       docker_server: quay.io
