@@ -43,7 +43,7 @@ last_org=`echo $last_org | sed -e 's/^[[:space:]]*//'`
 
 if [ "${DOCKER_ORG}" != "${last_org}" ]; then
   >&2 echo "Updating ${values_yaml} to org = ${DOCKER_ORG}/${DOCKER_REPO}"
-  sed -i -e 's/\(\s*repository:\).*/\1 '${DOCKER_ORG}'\/'${DOCKER_REPO}'/' ${values_yaml}
+  sed -i -e 's/\(\s*repository:\).*/\1 ' 'quay.io\/'${DOCKER_ORG}'\/'${DOCKER_REPO}'/' ${values_yaml}
   updates=$((updates+1))
 fi
 
@@ -105,4 +105,4 @@ if [[ ${last_gradle_tag} != ${VERSION} ]]; then
 fi
 
 echo $updates
-exit 0 
+exit 0
