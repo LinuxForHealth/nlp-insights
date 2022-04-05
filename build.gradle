@@ -16,7 +16,7 @@ ext {
   production_pkgs = [
     'ibm-whcs-sdk:1.9.0',
     'fhir.resources:6.1.0',
-    'flask:2.0.1'
+    'flask:2.1.1'
   ]
 
   dev_pkgs = [
@@ -351,7 +351,7 @@ task docTestSource(type: PythonTask) {
     "--doctest-modules",
     "--junit-xml=${pyDocTestXmlFile}"
   ]
-  
+
 }
 
 
@@ -379,11 +379,11 @@ task flake8(type: Exec) {
   ignoreExitValue=true
   workingDir = "${project.buildDir}"
   commandLine "${buildVenv}/bin/flake8", "${pySrcDir}/py", "--format=junit-xml", "--config=setup.cfg"
-  
+
   doLast {
     outputs.files.singleFile.text = standardOutput.toString()
   }
-  
+
 }
 
 
@@ -445,8 +445,8 @@ task checkSource {
   group 'quality'
   dependsOn project.tasks.lint
   dependsOn project.tasks.test
-  
-  
+
+
   doLast {
     groovy.xml.XmlSlurper slurper = new groovy.xml.XmlSlurper();
 
@@ -484,12 +484,12 @@ task checkSource {
       count += v.size()
       message.append("${fname} : ${v.size()} warnings\n")
     }
-    
+
     if (count && !project.hasProperty("noFailForSourceProblems")) {
       System.err.println(message)
       throw new GradleException("Build Failed with ${count} source code issues!")
     }
-    
+
     println(message)
   }
 }
@@ -522,7 +522,7 @@ docker {
 
   name dockerUser + "/${project.name}:" + version
   dockerfile file('Dockerfile')
-  
+
 }
 
 dockerPush {}
@@ -542,4 +542,3 @@ tasks.each {
     it.mustRunAfter clean
   }
 }
-
