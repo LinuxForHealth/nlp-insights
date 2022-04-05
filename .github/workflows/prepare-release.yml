@@ -8,7 +8,7 @@
 #
 # Othewise the pull can never be merged because no status check runs.
 # This is described here: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/troubleshooting-required-status-checks#handling-skipped-but-required-checks
-name: Prepare to release nlp-insights 
+name: Prepare to release nlp-insights
 on:
   pull_request:
     types: [opened, synchronize, labeled, reopened]
@@ -65,7 +65,7 @@ jobs:
              UPDATES=$(.github/workflows/scripts/update_files_with_version.sh \
               --project_dir=. \
               --version=${{ env.VERSION }} \
-              --docker_org=${{ env.docker_org }} \
+              --docker_org=${{ env.docker_server }}/${{ env.docker_org }} \
               --docker_repo=${{ env.docker_repo}})
 
              >&2 echo "${UPDATES} changes were made to update the release to ${{ env.VERSION }}"
@@ -89,7 +89,7 @@ jobs:
       - name: Validate Documentation
         run: |
              pip install --upgrade pip && pip install mkdocs mkdocs-gen-files pymdown-extensions
-             mkdocs build -s      
+             mkdocs build -s
       - name: Push Docker Image
         run: |
              ./gradlew dockerPush -PdockerUser=${{ env.docker_server }}/${{ env.docker_org }}
@@ -111,7 +111,7 @@ jobs:
              BUILD_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
              sha=$(git rev-parse HEAD)
              obj="{\"state\" : \"success\", \"context\" : \"Prepare release\", \"target_url\": \"${BUILD_URL}\" }"
- 
+
              curl -X POST "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/statuses/${sha}"  \
                   -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
                   -H "Accept: application/vnd.github.v3+json" \
