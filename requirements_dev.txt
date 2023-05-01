@@ -13,7 +13,7 @@
 ### Production Dependencies
 ibm-whcs-sdk==1.9.0
 fhir.resources==6.1.0
-flask==2.1.1
+flask==2.3.2
 
 ### Development Dependencies
 pytest==6.2.5
